@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # Test Smart Contracts
+  test-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install Sui
+        run: |
+          cargo install --locked --git https://github.com/MystenLabs/sui.git --branch testnet sui
+      
+      - name: Build contracts
+        run: |
+          cd contracts
+          sui move build
+      
+      - name: Run tests
+        run: |
+          cd contracts
+          sui move test
+
+  # Test Oracle Node
+  test-oracle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          cd oracle-node
+          pip install -r requirements.txt
+      
+      - name: Run linter
+        run: |
+          cd oracle-node
+          pip install flake8
+          flake8 oracle_node.py --max-line-length=100
+
+  # Test Frontend
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+      
+      - name: Run linter
+        run: |
+          cd frontend
+          npm run lint
+      
+      - name: Build
+        run: |
+          cd frontend
+          npm run build

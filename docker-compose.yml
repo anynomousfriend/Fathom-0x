@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Oracle Node Service
+  oracle:
+    build:
+      context: ./oracle-node
+      dockerfile: Dockerfile
+    env_file:
+      - ./oracle-node/.env
+    restart: unless-stopped
+    networks:
+      - fathom-network
+    depends_on:
+      - frontend
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env.local
+    restart: unless-stopped
+    networks:
+      - fathom-network
+
+networks:
+  fathom-network:
+    driver: bridge
