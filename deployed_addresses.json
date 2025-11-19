@@ -1,0 +1,16 @@
+{
+  "network": "testnet",
+  "packageId": "0xc1c7e98b6ec28ed8c722e8dba6dcadded25797a88b1778bdf3f9a754ed275274",
+  "adminCapId": "0x28e0601f5ec78cc34183bf892451377775ac6b702e930c9117ff423062888395",
+  "configObjectId": "0xd4f796e0c1f82064d8f1ed8f4fae3e061869f485f53d16e82b139a49301392d1",
+  "upgradeCapId": "0x1a09f6482b06750fa5d2ddac4baa23666e8277db6874a10c0dfc69c6a67fdf7e",
+  "deployer": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20",
+  "transactionDigest": "6SQFH9kdrWD9vGHTWyaY41e1JZjiu68spetpL1LCYPsi",
+  "deployedAt": "2024-11-19T19:16:31.623Z",
+  "gasUsed": {
+    "computation": "1000000 MIST",
+    "storage": "21941200 MIST",
+    "total": "21963080 MIST (0.02196308 SUI)"
+  },
+  "explorerUrl": "https://suiscan.xyz/testnet/object/0xc1c7e98b6ec28ed8c722e8dba6dcadded25797a88b1778bdf3f9a754ed275274"
+}

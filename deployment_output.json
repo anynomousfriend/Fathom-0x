@@ -1,0 +1,276 @@
+[warning] Client/Server api version mismatch, client api version : 1.60.0, server api version : 1.61.0
+[Note]: Dependency sources are no longer verified automatically during publication and upgrade. You can pass the `--verify-deps` option if you would like to verify them as part of publication or upgrade.
+[note] Dependencies on Bridge, MoveStdlib, Sui, and SuiSystem are automatically added, but this feature is disabled for your package because you have explicitly included dependencies on Sui. Consider removing these dependencies from Move.toml.
+UPDATING GIT DEPENDENCY https://github.com/MystenLabs/sui.git
+INCLUDING DEPENDENCY Sui
+INCLUDING DEPENDENCY MoveStdlib
+BUILDING fathom
+[0m[1m[38;5;11mwarning[W09011][0m[1m: unused constant[0m
+   [0m[34m┌─[0m /home/subhankar/Development/Fathom-0x/contracts/sources/fathom.move:12:11
+   [0m[34m│[0m
+[0m[34m12[0m [0m[34m│[0m     const [0m[33mEInvalidSignature[0m: u64 = 2;
+   [0m[34m│[0m           [0m[33m^^^^^^^^^^^^^^^^^[0m [0m[33mThe constant 'EInvalidSignature' is never used. Consider removing it.[0m
+   [0m[34m│[0m
+   [0m[34m=[0m This warning can be suppressed with '#[allow(unused_const)]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+[0m[1m[38;5;11mwarning[W09011][0m[1m: unused constant[0m
+   [0m[34m┌─[0m /home/subhankar/Development/Fathom-0x/contracts/sources/fathom.move:13:11
+   [0m[34m│[0m
+[0m[34m13[0m [0m[34m│[0m     const [0m[33mEDocumentNotFound[0m: u64 = 3;
+   [0m[34m│[0m           [0m[33m^^^^^^^^^^^^^^^^^[0m [0m[33mThe constant 'EDocumentNotFound' is never used. Consider removing it.[0m
+   [0m[34m│[0m
+   [0m[34m=[0m This warning can be suppressed with '#[allow(unused_const)]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+[0m[1m[38;5;11mwarning[Lint W99010][0m[1m: unnecessary `entry` on a `public` function[0m
+    [0m[34m┌─[0m /home/subhankar/Development/Fathom-0x/contracts/sources/fathom.move:105:12
+    [0m[34m│[0m
+[0m[34m105[0m [0m[34m│[0m     public [0m[33mentry[0m fun update_oracle(
+    [0m[34m│[0m            [0m[33m^^^^^[0m [0m[33m`entry` on `public` functions limits composability as it adds restrictions, e.g. the type of each return value must have `drop`. `entry` on `public` is only meaningful in niche scenarios.[0m
+    [0m[34m│[0m
+    [0m[34m=[0m `public` functions can be called from PTBs. `entry` can be used to allow non-`public` functions to be called from PTBs, but it adds restrictions on the usage of input arguments and on the type of return values. Unless this `public` function interacts with an intricate set of other `entry` functions, the `entry` modifier should be removed.
+    [0m[34m=[0m This warning can be suppressed with '#[allow(lint(public_entry))]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+[0m[1m[38;5;11mwarning[Lint W99010][0m[1m: unnecessary `entry` on a `public` function[0m
+    [0m[34m┌─[0m /home/subhankar/Development/Fathom-0x/contracts/sources/fathom.move:116:12
+    [0m[34m│[0m
+[0m[34m116[0m [0m[34m│[0m     public [0m[33mentry[0m fun register_document(
+    [0m[34m│[0m            [0m[33m^^^^^[0m [0m[33m`entry` on `public` functions limits composability as it adds restrictions, e.g. the type of each return value must have `drop`. `entry` on `public` is only meaningful in niche scenarios.[0m
+    [0m[34m│[0m
+    [0m[34m=[0m `public` functions can be called from PTBs. `entry` can be used to allow non-`public` functions to be called from PTBs, but it adds restrictions on the usage of input arguments and on the type of return values. Unless this `public` function interacts with an intricate set of other `entry` functions, the `entry` modifier should be removed.
+    [0m[34m=[0m This warning can be suppressed with '#[allow(lint(public_entry))]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+[0m[1m[38;5;11mwarning[Lint W99010][0m[1m: unnecessary `entry` on a `public` function[0m
+    [0m[34m┌─[0m /home/subhankar/Development/Fathom-0x/contracts/sources/fathom.move:155:12
+    [0m[34m│[0m
+[0m[34m155[0m [0m[34m│[0m     public [0m[33mentry[0m fun submit_query(
+    [0m[34m│[0m            [0m[33m^^^^^[0m [0m[33m`entry` on `public` functions limits composability as it adds restrictions, e.g. the type of each return value must have `drop`. `entry` on `public` is only meaningful in niche scenarios.[0m
+    [0m[34m│[0m
+    [0m[34m=[0m `public` functions can be called from PTBs. `entry` can be used to allow non-`public` functions to be called from PTBs, but it adds restrictions on the usage of input arguments and on the type of return values. Unless this `public` function interacts with an intricate set of other `entry` functions, the `entry` modifier should be removed.
+    [0m[34m=[0m This warning can be suppressed with '#[allow(lint(public_entry))]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+[0m[1m[38;5;11mwarning[Lint W99010][0m[1m: unnecessary `entry` on a `public` function[0m
+    [0m[34m┌─[0m /home/subhankar/Development/Fathom-0x/contracts/sources/fathom.move:192:12
+    [0m[34m│[0m
+[0m[34m192[0m [0m[34m│[0m     public [0m[33mentry[0m fun submit_answer(
+    [0m[34m│[0m            [0m[33m^^^^^[0m [0m[33m`entry` on `public` functions limits composability as it adds restrictions, e.g. the type of each return value must have `drop`. `entry` on `public` is only meaningful in niche scenarios.[0m
+    [0m[34m│[0m
+    [0m[34m=[0m `public` functions can be called from PTBs. `entry` can be used to allow non-`public` functions to be called from PTBs, but it adds restrictions on the usage of input arguments and on the type of return values. Unless this `public` function interacts with an intricate set of other `entry` functions, the `entry` modifier should be removed.
+    [0m[34m=[0m This warning can be suppressed with '#[allow(lint(public_entry))]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+Please report feedback on the linter warnings at https://forums.sui.io
+
+Skipping dependency verification
+{
+  "digest": "6SQFH9kdrWD9vGHTWyaY41e1JZjiu68spetpL1LCYPsi",
+  "transaction": {
+    "data": {
+      "messageVersion": "v1",
+      "transaction": {
+        "kind": "ProgrammableTransaction",
+        "inputs": [
+          {
+            "type": "pure",
+            "valueType": "address",
+            "value": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20"
+          }
+        ],
+        "transactions": [
+          {
+            "Publish": [
+              "0x0000000000000000000000000000000000000000000000000000000000000001",
+              "0x0000000000000000000000000000000000000000000000000000000000000002"
+            ]
+          },
+          {
+            "TransferObjects": [
+              [
+                {
+                  "Result": 0
+                }
+              ],
+              {
+                "Input": 0
+              }
+            ]
+          }
+        ]
+      },
+      "sender": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20",
+      "gasData": {
+        "payment": [
+          {
+            "objectId": "0xae15c44805e08cc95a5e60162b881178630b8f2d1f6ce2893ddd1890acb17c01",
+            "version": 656192660,
+            "digest": "rS6uXyuTcmLwViy1agaLtbFdX2wGaBtvc3SSXwX4AoU"
+          }
+        ],
+        "owner": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20",
+        "price": "1000",
+        "budget": "50000000"
+      }
+    },
+    "txSignatures": [
+      "ABLVqKYIroM5DuZf+lf3nl0ZfGotFeOf/RqxnnYs5qTna+7e9gHvHqZI2g2MajzhcWqd22i/Gtd+jgCs07pxBQ35OOX3XWf2pmzCHOaqPWQ/nZrwY6yk0LQDyuyYdk3i7g=="
+    ]
+  },
+  "effects": {
+    "messageVersion": "v1",
+    "status": {
+      "status": "success"
+    },
+    "executedEpoch": "923",
+    "gasUsed": {
+      "computationCost": "1000000",
+      "storageCost": "21941200",
+      "storageRebate": "978120",
+      "nonRefundableStorageFee": "9880"
+    },
+    "modifiedAtVersions": [
+      {
+        "objectId": "0xae15c44805e08cc95a5e60162b881178630b8f2d1f6ce2893ddd1890acb17c01",
+        "sequenceNumber": "656192660"
+      }
+    ],
+    "transactionDigest": "6SQFH9kdrWD9vGHTWyaY41e1JZjiu68spetpL1LCYPsi",
+    "created": [
+      {
+        "owner": {
+          "AddressOwner": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20"
+        },
+        "reference": {
+          "objectId": "0x1a09f6482b06750fa5d2ddac4baa23666e8277db6874a10c0dfc69c6a67fdf7e",
+          "version": 656192661,
+          "digest": "BK5eS3Tb21QsX5qB9ejzyq7zX6NQarMFe6pBpfCkJYPw"
+        }
+      },
+      {
+        "owner": {
+          "AddressOwner": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20"
+        },
+        "reference": {
+          "objectId": "0x28e0601f5ec78cc34183bf892451377775ac6b702e930c9117ff423062888395",
+          "version": 656192661,
+          "digest": "GFn2C2RNXKGYXkLFV3mK9AFQ21GN9PUC6famZGrFQ9kk"
+        }
+      },
+      {
+        "owner": "Immutable",
+        "reference": {
+          "objectId": "0xc1c7e98b6ec28ed8c722e8dba6dcadded25797a88b1778bdf3f9a754ed275274",
+          "version": 1,
+          "digest": "5yFjbfoyg8SSaiiqZh6GJEtYLTpAwuqXFthBDi6VKupa"
+        }
+      },
+      {
+        "owner": {
+          "Shared": {
+            "initial_shared_version": 656192661
+          }
+        },
+        "reference": {
+          "objectId": "0xd4f796e0c1f82064d8f1ed8f4fae3e061869f485f53d16e82b139a49301392d1",
+          "version": 656192661,
+          "digest": "74VNu5uLZp7W5xsMLwP9xzHBp2XbF7eDYv1czAxRuiDU"
+        }
+      }
+    ],
+    "mutated": [
+      {
+        "owner": {
+          "AddressOwner": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20"
+        },
+        "reference": {
+          "objectId": "0xae15c44805e08cc95a5e60162b881178630b8f2d1f6ce2893ddd1890acb17c01",
+          "version": 656192661,
+          "digest": "EBkyVqnq3UbS9fC4HXrSpTpNpL55Qi5P9wkwTBSdPbAE"
+        }
+      }
+    ],
+    "gasObject": {
+      "owner": {
+        "AddressOwner": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20"
+      },
+      "reference": {
+        "objectId": "0xae15c44805e08cc95a5e60162b881178630b8f2d1f6ce2893ddd1890acb17c01",
+        "version": 656192661,
+        "digest": "EBkyVqnq3UbS9fC4HXrSpTpNpL55Qi5P9wkwTBSdPbAE"
+      }
+    },
+    "dependencies": [
+      "4sJ62LyRWGK55hkNKuuE2rSUjsAqBdhzkHMxuG5wY7Fu",
+      "Dd9pn1zFcSJjinxQewFd2gQdR4XKsHxFioD5MYnwLZQz",
+      "GppkRKgQ5ZXNWpCC3BTd9tXG4zF3ACacZK9Pu8eCvJiz"
+    ]
+  },
+  "events": [],
+  "objectChanges": [
+    {
+      "type": "mutated",
+      "sender": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20",
+      "owner": {
+        "AddressOwner": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20"
+      },
+      "objectType": "0x2::coin::Coin<0x2::sui::SUI>",
+      "objectId": "0xae15c44805e08cc95a5e60162b881178630b8f2d1f6ce2893ddd1890acb17c01",
+      "version": "656192661",
+      "previousVersion": "656192660",
+      "digest": "EBkyVqnq3UbS9fC4HXrSpTpNpL55Qi5P9wkwTBSdPbAE"
+    },
+    {
+      "type": "created",
+      "sender": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20",
+      "owner": {
+        "AddressOwner": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20"
+      },
+      "objectType": "0x2::package::UpgradeCap",
+      "objectId": "0x1a09f6482b06750fa5d2ddac4baa23666e8277db6874a10c0dfc69c6a67fdf7e",
+      "version": "656192661",
+      "digest": "BK5eS3Tb21QsX5qB9ejzyq7zX6NQarMFe6pBpfCkJYPw"
+    },
+    {
+      "type": "created",
+      "sender": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20",
+      "owner": {
+        "AddressOwner": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20"
+      },
+      "objectType": "0xc1c7e98b6ec28ed8c722e8dba6dcadded25797a88b1778bdf3f9a754ed275274::fathom::AdminCap",
+      "objectId": "0x28e0601f5ec78cc34183bf892451377775ac6b702e930c9117ff423062888395",
+      "version": "656192661",
+      "digest": "GFn2C2RNXKGYXkLFV3mK9AFQ21GN9PUC6famZGrFQ9kk"
+    },
+    {
+      "type": "published",
+      "packageId": "0xc1c7e98b6ec28ed8c722e8dba6dcadded25797a88b1778bdf3f9a754ed275274",
+      "version": "1",
+      "digest": "5yFjbfoyg8SSaiiqZh6GJEtYLTpAwuqXFthBDi6VKupa",
+      "modules": [
+        "fathom"
+      ]
+    },
+    {
+      "type": "created",
+      "sender": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20",
+      "owner": {
+        "Shared": {
+          "initial_shared_version": 656192661
+        }
+      },
+      "objectType": "0xc1c7e98b6ec28ed8c722e8dba6dcadded25797a88b1778bdf3f9a754ed275274::fathom::FathomConfig",
+      "objectId": "0xd4f796e0c1f82064d8f1ed8f4fae3e061869f485f53d16e82b139a49301392d1",
+      "version": "656192661",
+      "digest": "74VNu5uLZp7W5xsMLwP9xzHBp2XbF7eDYv1czAxRuiDU"
+    }
+  ],
+  "balanceChanges": [
+    {
+      "owner": {
+        "AddressOwner": "0x5faef464c1d69ede100e117dcca7a01e6b34d655364cc818235b77ba83651a20"
+      },
+      "coinType": "0x2::sui::SUI",
+      "amount": "-21963080"
+    }
+  ],
+  "timestampMs": "1763560591623",
+  "confirmedLocalExecution": true,
+  "checkpoint": "265919597"
+}
