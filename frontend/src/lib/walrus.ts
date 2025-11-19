@@ -28,13 +28,20 @@ export async function uploadToWalrus(
     });
 
     // Upload to Walrus publisher
-    const response = await fetch(`${WALRUS_PUBLISHER_URL}/v1/store`, {
+    // Try without /v1 prefix first (newer API format)
+    let response = await fetch(`${WALRUS_PUBLISHER_URL}/store`, {
       method: 'PUT',
       body: data,
-      headers: {
-        'Content-Type': 'application/octet-stream',
-      },
     });
+
+    // If that fails, try with /v1 prefix (older API format)
+    if (!response.ok && response.status === 404) {
+      console.log('Trying alternative endpoint...');
+      response = await fetch(`${WALRUS_PUBLISHER_URL}/v1/store`, {
+        method: 'PUT',
+        body: data,
+      });
+    }
 
     if (!response.ok) {
       const errorText = await response.text();
