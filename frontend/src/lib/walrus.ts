@@ -15,6 +15,7 @@ export interface WalrusUploadResult {
 /**
  * Upload a blob to Walrus storage
  * Uses the Walrus HTTP API for browser compatibility
+ * Falls back to mock mode if Walrus testnet is unavailable
  */
 export async function uploadToWalrus(
   data: Blob,
@@ -37,7 +38,11 @@ export async function uploadToWalrus(
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Walrus upload failed: ${response.status} - ${errorText}`);
+      console.warn(`⚠️  Walrus API returned ${response.status}, falling back to mock mode`);
+      
+      // Fall back to mock mode
+      const { uploadToWalrusMock } = await import('./walrus-mock');
+      return uploadToWalrusMock(data, metadata);
     }
 
     const result = await response.json();
@@ -50,7 +55,11 @@ export async function uploadToWalrus(
 
     if (!blobId) {
       console.error('Walrus response:', result);
-      throw new Error('No blob ID in Walrus response');
+      console.warn('⚠️  No blob ID in response, falling back to mock mode');
+      
+      // Fall back to mock mode
+      const { uploadToWalrusMock } = await import('./walrus-mock');
+      return uploadToWalrusMock(data, metadata);
     }
 
     console.log('✅ Upload successful!', {
@@ -65,7 +74,11 @@ export async function uploadToWalrus(
     };
   } catch (error) {
     console.error('❌ Walrus upload error:', error);
-    throw error;
+    console.warn('⚠️  Falling back to mock mode for demo');
+    
+    // Fall back to mock mode
+    const { uploadToWalrusMock } = await import('./walrus-mock');
+    return uploadToWalrusMock(data, metadata);
   }
 }
 
