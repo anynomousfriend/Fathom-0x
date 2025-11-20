@@ -1,27 +1,83 @@
 'use client'
 
 import { useState } from 'react'
-import { FileText, Plus } from 'lucide-react'
+import { FileText, Plus, Loader2, Copy, Check } from 'lucide-react'
 import { RegisterDocumentModal } from './RegisterDocumentModal'
+import { useSuiClientQuery, useCurrentAccount } from '@mysten/dapp-kit'
 
 interface DocumentListProps {
   selectedDocumentId: string | null
   onSelectDocument: (id: string) => void
 }
 
+interface Document {
+  id: string
+  name: string
+  description: string
+  blobId: string
+  createdAt: number
+  owner: string
+}
+
 export function DocumentList({ selectedDocumentId, onSelectDocument }: DocumentListProps) {
   const [showRegisterModal, setShowRegisterModal] = useState(false)
-  
-  // Mock documents - In production, fetch from blockchain
-  const documents = [
+  const [copiedBlobId, setCopiedBlobId] = useState<string | null>(null)
+  const account = useCurrentAccount()
+  const packageId = process.env.NEXT_PUBLIC_PACKAGE_ID
+
+  // Fetch owned Document objects from blockchain
+  const { data: ownedObjects, isLoading, refetch } = useSuiClientQuery(
+    'getOwnedObjects',
     {
-      id: '0x1234...',
-      name: 'Research Paper.pdf',
-      description: 'AI Security Research Paper',
-      blobId: 'blob123...',
-      createdAt: Date.now() - 86400000,
+      owner: account?.address || '',
+      filter: {
+        StructType: `${packageId}::fathom::Document`,
+      },
+      options: {
+        showContent: true,
+        showType: true,
+      },
     },
-  ]
+    {
+      enabled: !!account?.address && !!packageId,
+      refetchInterval: 5000, // Refetch every 5 seconds to pick up new documents
+    }
+  )
+
+  // Parse documents from blockchain data
+  const documents: Document[] = ownedObjects?.data
+    .map((obj: any) => {
+      if (!obj.data?.content?.fields) return null
+      
+      const fields = obj.data.content.fields
+      return {
+        id: obj.data.objectId,
+        name: fields.name || 'Untitled Document',
+        description: fields.description || 'No description',
+        blobId: fields.walrus_blob_id || '',
+        createdAt: parseInt(fields.created_at || '0'),
+        owner: fields.owner || '',
+      }
+    })
+    .filter((doc): doc is Document => doc !== null) || []
+
+  // Trigger refetch when modal closes (to pick up newly registered documents)
+  const handleModalClose = () => {
+    setShowRegisterModal(false)
+    setTimeout(() => refetch(), 1000) // Refetch after 1 second delay
+  }
+
+  // Copy blob ID to clipboard
+  const copyBlobId = async (blobId: string, e: React.MouseEvent) => {
+    e.stopPropagation() // Prevent document selection
+    try {
+      await navigator.clipboard.writeText(blobId)
+      setCopiedBlobId(blobId)
+      setTimeout(() => setCopiedBlobId(null), 2000) // Reset after 2 seconds
+    } catch (err) {
+      console.error('Failed to copy blob ID:', err)
+    }
+  }
 
   return (
     <div className="space-y-4">
@@ -34,11 +90,17 @@ export function DocumentList({ selectedDocumentId, onSelectDocument }: DocumentL
         <span className="font-medium">Register New Document</span>
       </button>
 
-      {/* Document List */}
-      {documents.length === 0 ? (
+      {/* Loading State */}
+      {isLoading ? (
+        <div className="text-center py-12">
+          <Loader2 className="w-12 h-12 mx-auto mb-4 text-blue-500 animate-spin" />
+          <p className="text-gray-600">Loading your documents...</p>
+        </div>
+      ) : documents.length === 0 ? (
         <div className="text-center py-12 text-gray-500">
           <FileText className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-          <p>No documents yet. Register your first document to get started.</p>
+          <p className="font-medium mb-2">No documents yet</p>
+          <p className="text-sm">Register your first document to get started.</p>
         </div>
       ) : (
         <div className="grid gap-4">
@@ -65,7 +127,20 @@ export function DocumentList({ selectedDocumentId, onSelectDocument }: DocumentL
                   <h3 className="font-semibold text-gray-900">{doc.name}</h3>
                   <p className="text-sm text-gray-600 mt-1">{doc.description}</p>
                   <div className="flex items-center space-x-4 mt-3 text-xs text-gray-500">
-                    <span>Blob ID: {doc.blobId}</span>
+                    <div className="flex items-center space-x-2">
+                      <span>Blob ID: {doc.blobId.substring(0, 20)}...</span>
+                      <button
+                        onClick={(e) => copyBlobId(doc.blobId, e)}
+                        className="p-1 hover:bg-gray-200 rounded transition-colors"
+                        title="Copy full Blob ID"
+                      >
+                        {copiedBlobId === doc.blobId ? (
+                          <Check className="w-3 h-3 text-green-600" />
+                        ) : (
+                          <Copy className="w-3 h-3 text-gray-600" />
+                        )}
+                      </button>
+                    </div>
                     <span>•</span>
                     <span>{new Date(doc.createdAt).toLocaleDateString()}</span>
                   </div>
@@ -86,7 +161,7 @@ export function DocumentList({ selectedDocumentId, onSelectDocument }: DocumentL
 
       {/* Register Modal */}
       {showRegisterModal && (
-        <RegisterDocumentModal onClose={() => setShowRegisterModal(false)} />
+        <RegisterDocumentModal onClose={handleModalClose} />
       )}
     </div>
   )

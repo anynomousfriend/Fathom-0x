@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { X, Upload, Lock, CheckCircle, Loader2 } from 'lucide-react'
+import { X, Upload, Lock, CheckCircle, Loader2, Download, ExternalLink } from 'lucide-react'
 import { encryptFile, generateFingerprint } from '@/lib/encryption'
 import { uploadToWalrus } from '@/lib/walrus'
 import { useSignAndExecuteTransactionBlock } from '@mysten/dapp-kit'
@@ -19,6 +19,11 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
   })
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [encryptionKey, setEncryptionKey] = useState<string>('')
+  const [encryptedBlob, setEncryptedBlob] = useState<Blob | null>(null)
+  const [iv, setIv] = useState<string>('')
+  const [isMockMode, setIsMockMode] = useState(false)
+  const [registeredDocId, setRegisteredDocId] = useState<string>('')
+  const [txHash, setTxHash] = useState<string>('')
   const [uploadStep, setUploadStep] = useState<'select' | 'encrypting' | 'uploading' | 'registering' | 'complete'>('select')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -51,6 +56,8 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
       
       const { encryptedData, key, iv } = await encryptFile(selectedFile)
       setEncryptionKey(key)
+      setEncryptedBlob(encryptedData)
+      setIv(iv)
       
       console.log('✅ File encrypted', {
         originalSize: selectedFile.size,
@@ -70,6 +77,10 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
 
       console.log('✅ Uploaded to Walrus', result)
 
+      // Check if result has mock mode indicator (mock blob IDs start with 'mock_')
+      const isMock = result.blobId.startsWith('mock_')
+      setIsMockMode(isMock)
+
       // Step 3: Update form with blob ID
       setFormData(prev => ({
         ...prev,
@@ -83,7 +94,8 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
       console.error('❌ Upload error:', err)
       setError(err.message || 'Failed to encrypt and upload file')
       setLoading(false)
-      setUploadStep('select')
+      // Stay on complete step to allow manual upload
+      setUploadStep('complete')
     }
   }
 
@@ -137,8 +149,26 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
               localStorage.setItem('fathom_keys', JSON.stringify(keys))
             }
 
+            // Store transaction hash and document ID for verification
+            const digest = result.digest
+            setTxHash(digest)
+            
+            // Extract created object ID from result
+            const createdObjects = result.effects?.created || []
+            if (createdObjects.length > 0) {
+              const docId = createdObjects[0].reference.objectId
+              setRegisteredDocId(docId)
+              localStorage.setItem(`doc_${formData.blobId}`, docId)
+              // Store document metadata for browse page
+              localStorage.setItem(`name_${formData.blobId}`, formData.name)
+              localStorage.setItem(`desc_${formData.blobId}`, formData.description)
+              localStorage.setItem(`owner_${formData.blobId}`, result.effects?.executedEpoch || 'current-user')
+            }
+            
+            localStorage.setItem(`tx_${formData.blobId}`, digest)
+
             setLoading(false)
-            setTimeout(() => onClose(), 1500)
+            // Don't auto-close - let user see the explorer links
           },
           onError: (error) => {
             console.error('❌ Registration failed:', error)
@@ -153,6 +183,32 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
       setError(err.message || 'Failed to register document')
       setLoading(false)
       setUploadStep('complete')
+    }
+  }
+
+  const handleDownloadEncrypted = () => {
+    if (!encryptedBlob) return
+
+    const url = URL.createObjectURL(encryptedBlob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `encrypted_${selectedFile?.name || 'document'}.enc`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+    
+    console.log('✅ Encrypted file downloaded')
+  }
+
+  const handleManualBlobId = () => {
+    const blobId = prompt('Enter the Blob ID from Walrus CLI upload:')
+    if (blobId && blobId.trim()) {
+      setFormData(prev => ({
+        ...prev,
+        blobId: blobId.trim()
+      }))
+      console.log('✅ Manual Blob ID set:', blobId)
     }
   }
 
@@ -337,16 +393,96 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
           {/* Step 3: Upload Complete */}
           {uploadStep === 'complete' && (
             <>
-              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-6 h-6 text-green-600 mt-0.5" />
-                  <div>
-                    <p className="font-medium text-green-900 mb-2">✅ Upload Successful!</p>
-                    <div className="text-sm text-green-800 space-y-1">
-                      <p>• Document encrypted with AES-256</p>
-                      <p>• Uploaded to Walrus storage</p>
-                      <p>• Blob ID: {formData.blobId.substring(0, 20)}...</p>
+              {formData.blobId ? (
+                isMockMode ? (
+                  <div className="bg-orange-50 border-2 border-orange-400 rounded-lg p-6">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 text-orange-600 mt-0.5 text-2xl">⚠️</div>
+                      <div className="flex-1">
+                        <p className="font-bold text-orange-900 mb-2 text-lg">⚠️ MOCK MODE ACTIVE</p>
+                        <div className="text-sm text-orange-900 space-y-2">
+                          <p className="font-semibold">• Document encrypted with AES-256 ✅</p>
+                          <p className="font-semibold">• HTTP upload FAILED - Using simulated Blob ID ⚠️</p>
+                          <p className="font-semibold">• This is a DEMO blob ID (not on real Walrus network)</p>
+                          <div className="bg-orange-100 border border-orange-300 rounded p-3 mt-3">
+                            <p className="font-bold mb-1">🚨 Important:</p>
+                            <p className="text-xs">This mock Blob ID will work for demo purposes, but the document is NOT stored on Walrus. For real storage, use the manual upload option below.</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                ) : (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <div className="flex items-start space-x-3">
+                      <CheckCircle className="w-6 h-6 text-green-600 mt-0.5" />
+                      <div>
+                        <p className="font-medium text-green-900 mb-2">✅ Upload Successful!</p>
+                        <div className="text-sm text-green-800 space-y-1">
+                          <p>• Document encrypted with AES-256</p>
+                          <p>• Uploaded to Walrus storage</p>
+                          <p>• Blob ID: {formData.blobId.substring(0, 20)}...</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              ) : (
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                  <div className="flex items-start space-x-3">
+                    <Lock className="w-6 h-6 text-yellow-600 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-yellow-900 mb-2">⚠️ Encryption Complete - Manual Upload Required</p>
+                      <div className="text-sm text-yellow-800 space-y-1">
+                        <p>• Document encrypted with AES-256 ✅</p>
+                        <p>• HTTP upload failed - use manual upload below 📤</p>
+                        <p>• Your data is secure and ready to upload via CLI</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Download Encrypted File Section */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3">
+                    <Download className="w-5 h-5 text-blue-600 mt-0.5" />
+                    <div className="flex-1">
+                      <p className="font-medium text-blue-900 mb-1">💾 Backup Option</p>
+                      <p className="text-sm text-blue-800">
+                        Download the encrypted file as a backup or to manually upload to Walrus CLI.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex space-x-2">
+                    <button
+                      type="button"
+                      onClick={handleDownloadEncrypted}
+                      disabled={!encryptedBlob}
+                      className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 font-medium flex items-center justify-center space-x-2 text-sm"
+                    >
+                      <Download className="w-4 h-4" />
+                      <span>Download Encrypted File</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleManualBlobId}
+                      className="flex-1 px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 font-medium text-sm"
+                    >
+                      Enter Blob ID Manually
+                    </button>
+                  </div>
+                  
+                  <div className="bg-white border border-blue-200 rounded p-3 text-xs text-blue-800">
+                    <p className="font-medium mb-1">📝 Manual Upload Instructions:</p>
+                    <ol className="list-decimal list-inside space-y-1 ml-2">
+                      <li>Download the encrypted file above</li>
+                      <li>Upload it using Walrus CLI: <code className="bg-blue-100 px-1 rounded">walrus store file.enc --epochs 5</code></li>
+                      <li>Copy the Blob ID from the output</li>
+                      <li>Click "Enter Blob ID Manually" and paste it</li>
+                    </ol>
                   </div>
                 </div>
               </div>
@@ -377,17 +513,17 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
                 </button>
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !formData.blobId}
                   className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 font-medium"
                 >
-                  {loading ? 'Registering on Blockchain...' : 'Register Document'}
+                  {loading ? 'Registering on Blockchain...' : !formData.blobId ? 'Enter Blob ID First' : 'Register Document'}
                 </button>
               </div>
             </>
           )}
 
           {/* Step 4: Registering */}
-          {uploadStep === 'registering' && (
+          {uploadStep === 'registering' && !registeredDocId && (
             <div className="py-12">
               <div className="flex flex-col items-center space-y-4">
                 <Loader2 className="w-16 h-16 text-blue-600 animate-spin" />
@@ -400,6 +536,77 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
                   </p>
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* Step 5: Registration Complete */}
+          {registeredDocId && txHash && (
+            <div className="space-y-6">
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-300 rounded-lg p-6">
+                <div className="flex items-start space-x-3 mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                  <div>
+                    <p className="text-xl font-bold text-green-900 mb-2">🎉 Document Registered Successfully!</p>
+                    <p className="text-sm text-green-800">Your document is now on the blockchain and ready to be queried.</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 mt-4">
+                  {/* Document ID */}
+                  <div className="bg-white rounded-lg p-3 border border-green-200">
+                    <p className="text-xs font-semibold text-gray-600 mb-1">Document ID:</p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-mono text-gray-800">{registeredDocId.substring(0, 30)}...</p>
+                      <a
+                        href={`https://suiscan.xyz/testnet/object/${registeredDocId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-blue-600 hover:text-blue-700 text-sm font-medium"
+                      >
+                        <span>View Document</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Transaction Hash */}
+                  <div className="bg-white rounded-lg p-3 border border-green-200">
+                    <p className="text-xs font-semibold text-gray-600 mb-1">Transaction Hash:</p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-mono text-gray-800">{txHash.substring(0, 30)}...</p>
+                      <a
+                        href={`https://suiscan.xyz/testnet/tx/${txHash}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-blue-600 hover:text-blue-700 text-sm font-medium"
+                      >
+                        <span>View Transaction</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Blob ID */}
+                  <div className="bg-white rounded-lg p-3 border border-green-200">
+                    <p className="text-xs font-semibold text-gray-600 mb-1">Walrus Blob ID:</p>
+                    <p className="text-sm font-mono text-gray-800 break-all">{formData.blobId}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p className="text-sm text-blue-900">
+                  <span className="font-semibold">✅ What's Next:</span> Your document is now discoverable on the Browse page. Others can query it while the data stays encrypted and private.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={onClose}
+                className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 font-semibold"
+              >
+                Done - Go to Browse Page
+              </button>
             </div>
           )}
         </form>

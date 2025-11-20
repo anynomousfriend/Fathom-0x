@@ -52,3 +52,6 @@ ENV/
 # Temporary files
 *.tmp
 .cache/
+
+# Documentation
+docs/

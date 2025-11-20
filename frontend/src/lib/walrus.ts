@@ -1,87 +1,59 @@
 /**
  * Walrus integration utilities
  * Handles upload and retrieval of blobs from Walrus storage
+ * Uses enhanced Walrus client with automatic fallback to mock mode
  */
 
-const WALRUS_PUBLISHER_URL = process.env.NEXT_PUBLIC_WALRUS_PUBLISHER_URL || 'https://publisher.walrus-testnet.walrus.space';
-const WALRUS_AGGREGATOR_URL = process.env.NEXT_PUBLIC_WALRUS_AGGREGATOR_URL || 'https://aggregator.walrus-testnet.walrus.space';
+import { walrusClient, WalrusUploadResult as WalrusClientUploadResult } from './walrus-client';
 
 export interface WalrusUploadResult {
   blobId: string;
   size: number;
   uploadedAt: string;
+  suiRefObject?: string;
+  endEpoch?: number;
 }
 
 /**
  * Upload a blob to Walrus storage
- * Uses the Walrus HTTP API for browser compatibility
- * Falls back to mock mode if Walrus testnet is unavailable
+ * Automatically tries real Walrus first, falls back to mock if unavailable
  */
 export async function uploadToWalrus(
   data: Blob,
   metadata?: Record<string, string>
 ): Promise<WalrusUploadResult> {
   try {
-    console.log('📤 Uploading to Walrus...', {
+    console.log('📤 Starting Walrus upload...', {
       size: data.size,
-      type: data.type
+      type: data.type,
+      metadata,
     });
 
-    // Upload to Walrus publisher
-    // Try without /v1 prefix first (newer API format)
-    let response = await fetch(`${WALRUS_PUBLISHER_URL}/store`, {
-      method: 'PUT',
-      body: data,
+    // Try real Walrus upload using enhanced client
+    const result = await walrusClient.upload(data, {
+      epochs: 5, // Store for 5 epochs (configurable)
     });
 
-    // If that fails, try with /v1 prefix (older API format)
-    if (!response.ok && response.status === 404) {
-      console.log('Trying alternative endpoint...');
-      response = await fetch(`${WALRUS_PUBLISHER_URL}/v1/store`, {
-        method: 'PUT',
-        body: data,
-      });
-    }
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.warn(`⚠️  Walrus API returned ${response.status}, falling back to mock mode`);
-      
-      // Fall back to mock mode
-      const { uploadToWalrusMock } = await import('./walrus-mock');
-      return uploadToWalrusMock(data, metadata);
-    }
-
-    const result = await response.json();
-    
-    // Extract blob ID from response
-    // Walrus returns different formats, handle both
-    const blobId = result.newlyCreated?.blobObject?.blobId || 
-                   result.alreadyCertified?.blobId ||
-                   result.blobId;
-
-    if (!blobId) {
-      console.error('Walrus response:', result);
-      console.warn('⚠️  No blob ID in response, falling back to mock mode');
-      
-      // Fall back to mock mode
-      const { uploadToWalrusMock } = await import('./walrus-mock');
-      return uploadToWalrusMock(data, metadata);
-    }
-
-    console.log('✅ Upload successful!', {
-      blobId: blobId.substring(0, 20) + '...',
-      size: data.size
+    console.log('✅ Walrus upload successful!', {
+      blobId: result.blobId.substring(0, 20) + '...',
+      size: result.size,
+      endEpoch: result.endEpoch,
     });
 
-    return {
-      blobId,
-      size: data.size,
-      uploadedAt: new Date().toISOString(),
-    };
+    return result;
   } catch (error) {
     console.error('❌ Walrus upload error:', error);
     console.warn('⚠️  Falling back to mock mode for demo');
+    console.warn('    This is expected if Walrus testnet is down or rate-limited');
+    
+    // Show a clear alert to the user
+    alert('⚠️ MOCK MODE ACTIVE\n\n' +
+          'The Walrus HTTP upload failed.\n' +
+          'Using SIMULATED blob ID for demo purposes.\n\n' +
+          '💡 For real upload:\n' +
+          '1. Download the encrypted file\n' +
+          '2. Use Walrus CLI: walrus store file.enc --epochs 5\n' +
+          '3. Enter the real Blob ID manually');
     
     // Fall back to mock mode
     const { uploadToWalrusMock } = await import('./walrus-mock');
@@ -94,17 +66,11 @@ export async function uploadToWalrus(
  */
 export async function retrieveFromWalrus(blobId: string): Promise<Blob> {
   try {
-    console.log('📥 Fetching from Walrus:', blobId);
+    console.log('📥 Retrieving from Walrus:', blobId);
 
-    const response = await fetch(`${WALRUS_AGGREGATOR_URL}/v1/${blobId}`);
-
-    if (!response.ok) {
-      throw new Error(`Walrus retrieval failed: ${response.status}`);
-    }
-
-    const blob = await response.blob();
+    const blob = await walrusClient.download(blobId);
     
-    console.log('✅ Retrieved blob:', {
+    console.log('✅ Retrieved blob successfully:', {
       blobId: blobId.substring(0, 20) + '...',
       size: blob.size,
       type: blob.type
@@ -122,11 +88,9 @@ export async function retrieveFromWalrus(blobId: string): Promise<Blob> {
  */
 export async function checkBlobExists(blobId: string): Promise<boolean> {
   try {
-    const response = await fetch(`${WALRUS_AGGREGATOR_URL}/v1/${blobId}`, {
-      method: 'HEAD',
-    });
-    return response.ok;
+    return await walrusClient.exists(blobId);
   } catch (error) {
+    console.error('❌ Error checking blob existence:', error);
     return false;
   }
 }
@@ -137,23 +101,12 @@ export async function checkBlobExists(blobId: string): Promise<boolean> {
 export async function getBlobInfo(blobId: string): Promise<{
   exists: boolean;
   size?: number;
+  contentType?: string;
 }> {
   try {
-    const response = await fetch(`${WALRUS_AGGREGATOR_URL}/v1/${blobId}`, {
-      method: 'HEAD',
-    });
-
-    if (!response.ok) {
-      return { exists: false };
-    }
-
-    const size = response.headers.get('content-length');
-
-    return {
-      exists: true,
-      size: size ? parseInt(size, 10) : undefined,
-    };
+    return await walrusClient.getMetadata(blobId);
   } catch (error) {
+    console.error('❌ Error getting blob metadata:', error);
     return { exists: false };
   }
 }
