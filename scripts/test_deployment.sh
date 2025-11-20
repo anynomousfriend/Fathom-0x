@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Fathom Protocol Deployment Test Script
+# Fathom-0x Protocol Deployment Test Script
 # This script tests the entire deployment process
 
 set -e  # Exit on error
 
-echo "🧪 Testing Fathom Protocol Deployment"
+echo "🧪 Testing Fathom-0x Protocol Deployment"
 echo "======================================"
 echo ""
 

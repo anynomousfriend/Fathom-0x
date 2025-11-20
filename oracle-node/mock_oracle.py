@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Mock Oracle Node for Fathom Protocol Demo
+Mock Oracle Node for Fathom-0x Protocol Demo
 ==========================================
 
 This is a simplified mock oracle that simulates the TEE oracle functionality

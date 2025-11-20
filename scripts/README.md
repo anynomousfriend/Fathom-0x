@@ -1,6 +1,6 @@
 # Fathom Scripts
 
-Utility scripts for deploying and managing the Fathom Protocol.
+Utility scripts for deploying and managing the Fathom-0x Protocol.
 
 ## Scripts
 

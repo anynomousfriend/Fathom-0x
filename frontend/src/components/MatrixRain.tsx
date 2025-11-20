@@ -34,15 +34,24 @@ export function MatrixRain({ className = '' }: { className?: string }) {
             ctx.fillStyle = 'rgba(15, 23, 42, 0.05)' // Slate-900 with very low opacity for trail effect
             ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-            ctx.fillStyle = '#0F0' // Green text
             ctx.font = `${fontSize}px monospace`
 
             for (let i = 0; i < drops.length; i++) {
                 const text = characters.charAt(Math.floor(Math.random() * characters.length))
 
-                // Randomly vary color slightly for depth
-                const isBright = Math.random() > 0.9
-                ctx.fillStyle = isBright ? '#4ADE80' : '#22c55e' // green-400 vs green-500
+                // Randomly vary between cyan and blue (matching logo gradient)
+                const random = Math.random()
+                if (random > 0.9) {
+                    ctx.fillStyle = '#67e8f9' // Bright cyan (cyan-300)
+                } else if (random > 0.7) {
+                    ctx.fillStyle = '#22d3ee' // Cyan (cyan-400)
+                } else if (random > 0.4) {
+                    ctx.fillStyle = '#06b6d4' // Cyan (cyan-500) - primary
+                } else if (random > 0.2) {
+                    ctx.fillStyle = '#3b82f6' // Blue (blue-500) - secondary
+                } else {
+                    ctx.fillStyle = '#60a5fa' // Light blue (blue-400)
+                }
 
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize)
 

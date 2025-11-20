@@ -60,4 +60,4 @@ REFERENCES
 
 ---
 
-This document contains proprietary research findings and is intended for demonstration purposes in the Fathom Protocol system. All rights reserved.
+This document contains proprietary research findings and is intended for demonstration purposes in the Fathom-0x Protocol system. All rights reserved.

@@ -1,4 +1,4 @@
-/// Fathom Protocol - Verifiable RAG for Private Data on Walrus
+/// Fathom-0x Protocol - Verifiable RAG for Private Data on Walrus
 /// 
 /// This module enables users to query documents stored on Walrus through a
 /// verifiable oracle system with cryptographic proof of integrity.

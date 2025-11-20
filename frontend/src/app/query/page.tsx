@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { useSuiClient, useSignAndExecuteTransactionBlock } from '@mysten/dapp-kit'
 import { TransactionBlock } from '@mysten/sui.js/transactions'
 import { Header } from '@/components/Header'
-import { FileText, Send, Loader2, CheckCircle, ExternalLink, AlertCircle } from 'lucide-react'
+import { FileText, Send, Loader2, CheckCircle, ExternalLink, AlertCircle, Lock } from 'lucide-react'
 import Link from 'next/link'
 
 interface QueryResponse {
@@ -23,6 +23,8 @@ export default function QueryPage() {
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState<QueryResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [useRealRAG, setUseRealRAG] = useState(false)
+  const [ragApiUrl, setRagApiUrl] = useState('http://localhost:5000')
   
   const client = useSuiClient()
   const { mutate: signAndExecute } = useSignAndExecuteTransactionBlock()
@@ -135,8 +137,62 @@ export default function QueryPage() {
       // Simulate TEE processing time
       await new Promise(resolve => setTimeout(resolve, 2000))
 
-      // Get demo response
-      const answer = getDemoResponse(question)
+      let answer = ''
+      let modelUsed = 'demo'
+      
+      // Try real RAG if enabled
+      if (useRealRAG) {
+        try {
+          console.log('🤖 Using Real RAG API...')
+          
+          // Get encryption key from localStorage
+          const keys = JSON.parse(localStorage.getItem('fathom_keys') || '{}')
+          const docKeys = keys[document.blobId]
+          
+          console.log('🔑 Checking keys for blob:', document.blobId.substring(0, 20) + '...')
+          console.log('📦 Available keys:', Object.keys(keys).map(k => k.substring(0, 20) + '...'))
+          
+          if (!docKeys || !docKeys.key || !docKeys.iv) {
+            throw new Error('Encryption key not found for this document. Please register a new document and save the encryption key.')
+          }
+          
+          console.log('✅ Keys found:', {
+            key: docKeys.key.substring(0, 10) + '...',
+            iv: docKeys.iv.substring(0, 10) + '...'
+          })
+          
+          const ragResponse = await fetch(`${ragApiUrl}/query`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              blob_id: document.blobId,
+              encryption_key: docKeys.key,
+              iv: docKeys.iv,
+              question: question
+            })
+          })
+          
+          if (!ragResponse.ok) throw new Error('RAG API request failed')
+          
+          const data = await ragResponse.json()
+          answer = data.answer
+          modelUsed = data.model_used || 'rag'
+          
+          console.log('✅ Real RAG response received')
+          
+        } catch (ragError: any) {
+          console.error('❌ Real RAG failed:', ragError)
+          setError(`RAG unavailable: ${ragError.message}. Using demo mode.`)
+          answer = getDemoResponse(question)
+          modelUsed = 'demo-fallback'
+        }
+      } else {
+        answer = getDemoResponse(question)
+        modelUsed = 'demo'
+      }
+      
+      // Add model badge to answer
+      const answerWithBadge = `${answer}\n\n---\n📊 Mode: ${modelUsed === 'demo' ? 'Demo' : modelUsed === 'demo-fallback' ? 'Demo (RAG unavailable)' : 'Real RAG - ' + modelUsed.toUpperCase()}`
 
       // Try to get real transaction hash if document was uploaded by user
       let txHash = ''
@@ -155,7 +211,7 @@ export default function QueryPage() {
       }
 
       setResponse({
-        answer,
+        answer: answerWithBadge,
         timestamp: new Date().toISOString(),
         transactionHash: txHash
       })
@@ -266,7 +322,7 @@ export default function QueryPage() {
           {/* TEE Info Banner */}
           <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 rounded-xl p-6 mb-8">
             <div className="flex items-start gap-3">
-              <div className="text-2xl">🔒</div>
+              <Lock className="w-8 h-8 text-primary" />
               <div>
                 <h3 className="text-lg font-bold text-white mb-2">Privacy-Preserving Query</h3>
                 <p className="text-gray-300 text-sm">
@@ -295,8 +351,28 @@ export default function QueryPage() {
                   disabled={loading}
                 />
                 <p className="text-sm text-gray-400 mt-2">
-                  💡 Try asking: "What is the main conclusion?" or "What methodology was used?"
+                  Try asking: "What is the main conclusion?" or "What methodology was used?"
                 </p>
+              </div>
+
+              {/* RAG Toggle */}
+              <div className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-lg">
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-white">Use Real RAG</p>
+                  <p className="text-xs text-gray-400 mt-1">
+                    Enable AI-powered answers with actual document analysis (requires backend API)
+                  </p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={useRealRAG}
+                    onChange={(e) => setUseRealRAG(e.target.checked)}
+                    className="sr-only peer"
+                    disabled={loading}
+                  />
+                  <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
               </div>
 
               {error && (
@@ -313,7 +389,7 @@ export default function QueryPage() {
                 {loading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Processing Query in TEE...</span>
+                    <span>Processing{useRealRAG ? ' with AI' : ' in TEE'}...</span>
                   </>
                 ) : (
                   <>
@@ -362,9 +438,9 @@ export default function QueryPage() {
 
               <div className="mt-6 pt-6 border-t border-white/10">
                 <p className="text-sm text-gray-400">
-                  ✅ Answer verified and recorded on Sui blockchain
+                  • Answer verified and recorded on Sui blockchain
                   <br />
-                  🔒 Document processed securely in TEE without exposing raw data
+                  • Document processed securely in TEE without exposing raw data
                 </p>
               </div>
             </div>

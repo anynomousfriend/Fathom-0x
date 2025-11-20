@@ -1,6 +1,6 @@
-# 📂 Demo Data for Fathom Protocol
+# 📂 Demo Data for Fathom-0x Protocol
 
-This folder contains realistic demo documents for testing and demonstrating the Fathom Protocol.
+This folder contains realistic demo documents for testing and demonstrating the Fathom-0x Protocol.
 
 ---
 

@@ -20,8 +20,15 @@ export interface WalrusUploadResult {
  */
 export async function uploadToWalrus(
   data: Blob,
-  metadata?: Record<string, string>
+  metadata?: Record<string, string>,
+  forceMock?: boolean
 ): Promise<WalrusUploadResult> {
+  // If mock mode is forced, skip real upload
+  if (forceMock) {
+    console.log('🔧 Mock mode enabled - skipping real Walrus upload');
+    const { uploadToWalrusMock } = await import('./walrus-mock');
+    return uploadToWalrusMock(data, metadata);
+  }
   try {
     console.log('📤 Starting Walrus upload...', {
       size: data.size,
@@ -43,17 +50,7 @@ export async function uploadToWalrus(
     return result;
   } catch (error) {
     console.error('❌ Walrus upload error:', error);
-    console.warn('⚠️  Falling back to mock mode for demo');
-    console.warn('    This is expected if Walrus testnet is down or rate-limited');
-    
-    // Show a clear alert to the user
-    alert('⚠️ MOCK MODE ACTIVE\n\n' +
-          'The Walrus HTTP upload failed.\n' +
-          'Using SIMULATED blob ID for demo purposes.\n\n' +
-          '💡 For real upload:\n' +
-          '1. Download the encrypted file\n' +
-          '2. Use Walrus CLI: walrus store file.enc --epochs 5\n' +
-          '3. Enter the real Blob ID manually');
+    console.warn('⚠️ Falling back to mock mode - Walrus testnet may be down or rate-limited');
     
     // Fall back to mock mode
     const { uploadToWalrusMock } = await import('./walrus-mock');

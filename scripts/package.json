@@ -1,7 +1,7 @@
 {
   "name": "fathom-scripts",
   "version": "1.0.0",
-  "description": "Deployment and utility scripts for Fathom Protocol",
+  "description": "Deployment and utility scripts for Fathom-0x Protocol",
   "scripts": {
     "deploy": "ts-node deploy.ts",
     "upload": "node upload_blob.js"

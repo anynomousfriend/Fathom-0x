@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Starting Fathom Protocol Demo..."
+echo "🚀 Starting Fathom-0x Protocol Demo..."
 echo ""
 
 # Kill any existing processes

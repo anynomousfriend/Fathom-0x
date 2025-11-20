@@ -1,5 +1,5 @@
 /**
- * Encryption utilities for Fathom Protocol
+ * Encryption utilities for Fathom-0x Protocol
  * Handles client-side encryption/decryption of documents
  */
 
