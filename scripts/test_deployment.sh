@@ -5,7 +5,7 @@
 
 set -e  # Exit on error
 
-echo "🧪 Testing Fathom-0x Protocol Deployment"
+echo "[TEST] Testing Fathom-0x Protocol Deployment"
 echo "======================================"
 echo ""
 
@@ -90,9 +90,9 @@ echo -e "${RED}Failed: $TESTS_FAILED${NC}"
 echo ""
 
 if [ $TESTS_FAILED -eq 0 ]; then
-    echo -e "${GREEN}🎉 All tests passed! Ready for deployment.${NC}"
+    echo -e "${GREEN}[SUCCESS] All tests passed! Ready for deployment.${NC}"
     exit 0
 else
-    echo -e "${RED}⚠️  Some tests failed. Please fix the issues above.${NC}"
+    echo -e "${RED}[WARNING]  Some tests failed. Please fix the issues above.${NC}"
     exit 1
 fi

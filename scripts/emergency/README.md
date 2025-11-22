@@ -2,11 +2,11 @@
 
 These scripts help you recover quickly during demo failures.
 
-## 📋 Available Scripts
+## Available Scripts
 
 ### 1. `test_all_services.sh` - Pre-Demo Testing
-**When to use**: 1 hour before demo  
-**What it does**: Tests all services and reports status  
+**When to use**: 1 hour before demo
+**What it does**: Tests all services and reports status
 **Run time**: 30 seconds
 
 ```bash
@@ -14,21 +14,21 @@ These scripts help you recover quickly during demo failures.
 ```
 
 **Tests**:
-- ✅ Walrus HTTP upload
-- ✅ Walrus CLI functionality
-- ✅ Sui RPC connectivity
-- ✅ Oracle process running
-- ✅ Frontend accessibility
-- ✅ Wallet balance
-- ✅ Demo files present
+- Walrus HTTP upload
+- Walrus CLI functionality
+- Sui RPC connectivity
+- Oracle process running
+- Frontend accessibility
+- Wallet balance
+- Demo files present
 
 **Output**: Pass/Fail report with recovery suggestions
 
 ---
 
 ### 2. `restart_all.sh` - Nuclear Restart
-**When to use**: Everything is frozen/stuck  
-**What it does**: Kills and restarts all services  
+**When to use**: Everything is frozen/stuck
+**What it does**: Kills and restarts all services
 **Run time**: 15 seconds
 
 ```bash
@@ -43,15 +43,15 @@ These scripts help you recover quickly during demo failures.
 - Restarts oracle in background
 - Shows PIDs and log locations
 
-**Logs**: 
+**Logs**:
 - `logs/frontend.log`
 - `logs/oracle.log`
 
 ---
 
 ### 3. `enable_mock_mode.sh` - Instant Responses
-**When to use**: Oracle not responding or too slow  
-**What it does**: Enables mock mode for instant answers  
+**When to use**: Oracle not responding or too slow
+**What it does**: Enables mock mode for instant answers
 **Run time**: 5 seconds
 
 ```bash
@@ -75,8 +75,8 @@ These scripts help you recover quickly during demo failures.
 ---
 
 ### 4. `switch_to_backup_rpc.sh` - RPC Failover
-**When to use**: Blockchain RPC timing out  
-**What it does**: Tests and switches to working RPC  
+**When to use**: Blockchain RPC timing out
+**What it does**: Tests and switches to working RPC
 **Run time**: 10 seconds
 
 ```bash
@@ -97,19 +97,19 @@ These scripts help you recover quickly during demo failures.
 
 ---
 
-## 🚨 Quick Decision Guide
+## Quick Decision Guide
 
 ```
 Problem?
-├── All services frozen → restart_all.sh
-├── Oracle too slow → enable_mock_mode.sh
-├── Blockchain timeout → switch_to_backup_rpc.sh
-└── Not sure? → test_all_services.sh
+├── All services frozen restart_all.sh
+├── Oracle too slow enable_mock_mode.sh
+├── Blockchain timeout switch_to_backup_rpc.sh
+└── Not sure? test_all_services.sh
 ```
 
 ---
 
-## 📖 Usage Examples
+## Usage Examples
 
 ### Scenario 1: Pre-Demo Check
 ```bash
@@ -151,7 +151,7 @@ Problem?
 
 ---
 
-## 🎯 Demo Day Workflow
+## Demo Day Workflow
 
 ### 1 Hour Before
 ```bash
@@ -164,8 +164,8 @@ Problem?
 ### 30 Minutes Before
 ```bash
 # Final check
-ps aux | grep oracle_node.py  # Oracle running?
-curl localhost:3000 -I        # Frontend up?
+ps aux | grep oracle_node.py # Oracle running?
+curl localhost:3000 -I # Frontend up?
 
 # Have scripts ready to run
 ls emergency_scripts/
@@ -186,25 +186,25 @@ ls emergency_scripts/
 
 ---
 
-## 📝 What to Say During Recovery
+## What to Say During Recovery
 
 ### When restarting:
-> "Let me quickly restart the services—this is still hackathon code! 
+> "Let me quickly restart the services—this is still hackathon code!
 > In production, we'd have automatic failover... [run script] ...
 > there we go, back online!"
 
 ### When enabling mock mode:
-> "To demonstrate the flow without waiting for the AI, I'll enable 
+> "To demonstrate the flow without waiting for the AI, I'll enable
 > mock mode—this simulates instant oracle responses... [run script] ...
 > perfect, now let's continue."
 
 ### When switching RPC:
-> "The testnet RPC is experiencing some load. Let me switch to a 
+> "The testnet RPC is experiencing some load. Let me switch to a
 > backup endpoint... [run script] ...and we're back in business!"
 
 ---
 
-## 🔧 Troubleshooting the Scripts
+## Troubleshooting the Scripts
 
 ### Script won't run
 ```bash
@@ -235,67 +235,67 @@ cd oracle-node && python oracle_node.py
 
 ---
 
-## 📊 Script Success Indicators
+## Script Success Indicators
 
 ### restart_all.sh Success:
 ```
-✅ All services restarted!
+ All services restarted!
 Frontend: http://localhost:3000 (PID: 12345)
 Oracle: Running (PID: 67890)
 ```
 
 ### enable_mock_mode.sh Success:
 ```
-✅ Mock mode enabled!
+ Mock mode enabled!
 Oracle PID: 12345
 Mode: MOCK (instant responses)
 ```
 
 ### switch_to_backup_rpc.sh Success:
 ```
-✅ Frontend restarted (PID: 12345)
+ Frontend restarted (PID: 12345)
 New Configuration:
-  RPC: https://sui-testnet.nodeinfra.com
+ RPC: https://sui-testnet.nodeinfra.com
 ```
 
 ### test_all_services.sh Success:
 ```
-✅ ALL TESTS PASSED!
-🚀 You're ready for the demo!
+ ALL TESTS PASSED!
+ You're ready for the demo!
 ```
 
 ---
 
-## 🎓 Practice Using Scripts
+## Practice Using Scripts
 
 **Before demo day, practice**:
 
 1. **Simulate Walrus failure**:
-   ```bash
-   # Disconnect WiFi during upload
-   # Run: ./emergency_scripts/enable_mock_mode.sh
-   # Verify: Mock responses work
-   ```
+ ```bash
+ # Disconnect WiFi during upload
+ # Run: ./emergency_scripts/enable_mock_mode.sh
+ # Verify: Mock responses work
+ ```
 
 2. **Simulate oracle crash**:
-   ```bash
-   # Kill oracle: pkill -f oracle_node
-   # Run: ./emergency_scripts/restart_all.sh
-   # Verify: Oracle restarts
-   ```
+ ```bash
+ # Kill oracle: pkill -f oracle_node
+ # Run: ./emergency_scripts/restart_all.sh
+ # Verify: Oracle restarts
+ ```
 
 3. **Simulate RPC timeout**:
-   ```bash
-   # Block RPC in /etc/hosts temporarily
-   # Run: ./emergency_scripts/switch_to_backup_rpc.sh
-   # Verify: Frontend uses backup
-   ```
+ ```bash
+ # Block RPC in /etc/hosts temporarily
+ # Run: ./emergency_scripts/switch_to_backup_rpc.sh
+ # Verify: Frontend uses backup
+ ```
 
 **Target**: Execute any script in under 10 seconds!
 
 ---
 
-## 📞 If Scripts Fail
+## If Scripts Fail
 
 ### Last Resort Manual Recovery:
 
@@ -319,7 +319,7 @@ python oracle_node.py
 
 ---
 
-## ✅ Post-Demo
+## Post-Demo
 
 ### Clean up logs:
 ```bash
@@ -343,7 +343,7 @@ cat logs/oracle.log
 
 ---
 
-## 🎯 Remember
+## Remember
 
 - **Practice**: Run each script 3 times before demo
 - **Prepare**: Have terminal window ready with scripts
@@ -355,5 +355,5 @@ cat logs/oracle.log
 
 ---
 
-*Last Updated: November 2024*  
+*Last Updated: November 2024*
 *Keep this file open in a tab during your demo*

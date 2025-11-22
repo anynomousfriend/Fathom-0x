@@ -27,9 +27,9 @@ curl -s -X POST http://localhost:5000/query \
   }' | python3 -m json.tool
 echo ""
 
-echo "✅ Debug tests complete!"
+echo "[OK] Debug tests complete!"
 echo ""
-echo "💡 If mock works but real fails, the issue is:"
+echo "[TIP] If mock works but real fails, the issue is:"
 echo "   1. Missing encryption keys in localStorage"
 echo "   2. Wrong blob ID"
 echo "   3. Document not on Walrus"

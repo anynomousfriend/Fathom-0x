@@ -37,31 +37,31 @@ The smart contract manages the protocol's core logic:
 ```move
 /// Main configuration object for the Fathom protocol
 public struct FathomConfig has key {
-    id: UID,
-    oracle_address: address,
-    document_count: u64,
+ id: UID,
+ oracle_address: address,
+ document_count: u64,
 }
 
 /// Represents a document stored on Walrus
 public struct Document has key, store {
-    id: UID,
-    walrus_blob_id: String,
-    owner: address,
-    name: String,
-    description: String,
-    created_at: u64,
+ id: UID,
+ walrus_blob_id: String,
+ owner: address,
+ name: String,
+ description: String,
+ created_at: u64,
 }
 
 /// Represents a query submitted by a user
 public struct Query has key, store {
-    id: UID,
-    document_id: ID,
-    question: String,
-    requester: address,
-    answered: bool,
-    answer: String,
-    signature: vector<u8>,
-    timestamp: u64,
+ id: UID,
+ document_id: ID,
+ question: String,
+ requester: address,
+ answered: bool,
+ answer: String,
+ signature: vector<u8>,
+ timestamp: u64,
 }
 ```
 
@@ -103,23 +103,23 @@ Built with:
 ```typescript
 // Client-side AES-256-GCM encryption
 export async function encryptFile(file: File): Promise<{
-  encryptedData: ArrayBuffer
-  key: CryptoKey
-  iv: Uint8Array
+ encryptedData: ArrayBuffer
+ key: CryptoKey
+ iv: Uint8Array
 }> {
-  const data = await file.arrayBuffer()
-  const key = await crypto.subtle.generateKey(
-    { name: 'AES-GCM', length: 256 },
-    true,
-    ['encrypt', 'decrypt']
-  )
-  const iv = crypto.getRandomValues(new Uint8Array(12))
-  const encryptedData = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv },
-    key,
-    data
-  )
-  return { encryptedData, key, iv }
+ const data = await file.arrayBuffer()
+ const key = await crypto.subtle.generateKey(
+ { name: 'AES-GCM', length: 256 },
+ true,
+ ['encrypt', 'decrypt']
+ )
+ const iv = crypto.getRandomValues(new Uint8Array(12))
+ const encryptedData = await crypto.subtle.encrypt(
+ { name: 'AES-GCM', iv },
+ key,
+ data
+ )
+ return { encryptedData, key, iv }
 }
 ```
 
@@ -152,23 +152,23 @@ Walrus is Sui's decentralized storage network:
 
 ```typescript
 export async function uploadToWalrus(
-  encryptedFile: ArrayBuffer
+ encryptedFile: ArrayBuffer
 ): Promise<string> {
-  const blob = new Blob([encryptedFile])
-  const formData = new FormData()
-  formData.append('file', blob)
-  
-  const response = await fetch(
-    `${WALRUS_AGGREGATOR_URL}/v1/store`,
-    {
-      method: 'PUT',
-      body: formData,
-    }
-  )
-  
-  const result = await response.json()
-  return result.newlyCreated?.blobObject?.blobId || 
-         result.alreadyCertified?.blobId
+ const blob = new Blob([encryptedFile])
+ const formData = new FormData()
+ formData.append('file', blob)
+
+ const response = await fetch(
+ `${WALRUS_AGGREGATOR_URL}/v1/store`,
+ {
+ method: 'PUT',
+ body: formData,
+ }
+ )
+
+ const result = await response.json()
+ return result.newlyCreated?.blobObject?.blobId ||
+ result.alreadyCertified?.blobId
 }
 ```
 
@@ -205,7 +205,7 @@ export async function uploadToWalrus(
 - **Python 3.12** - Oracle implementation
 - **Flask** - RAG API server
 - **pysui** - Sui Python SDK
-- **OpenAI API** - GPT-4 for AI queries
+- **OpenAI API** - for AI queries
 - **Google Gemini** - Alternative AI provider
 - **ChromaDB** - Vector database for embeddings
 - **LangChain** - RAG framework
@@ -220,15 +220,15 @@ export async function uploadToWalrus(
 2. **Client generates AES-256 key** using Web Crypto API
 3. **File encrypted** with AES-GCM mode
 4. **Encrypted blob uploaded** to Walrus
-   - HTTP API attempt first
-   - CLI fallback if HTTP fails (testnet reliability)
+ - HTTP API attempt first
+ - CLI fallback if HTTP fails (testnet reliability)
 5. **Blob ID returned** from Walrus
 6. **Transaction submitted** to Sui smart contract
 7. **Document object created** on-chain with:
-   - Walrus blob ID
-   - Owner address
-   - Metadata (name, description)
-   - Timestamp
+ - Walrus blob ID
+ - Owner address
+ - Metadata (name, description)
+ - Timestamp
 8. **Encryption key stored** locally (browser localStorage)
 
 ### Query Processing Flow
@@ -242,11 +242,11 @@ export async function uploadToWalrus(
 7. **Oracle retrieves decryption key** (stored on-chain for hackathon)
 8. **Document decrypted** by oracle
 9. **RAG processing**:
-   - Document chunked into segments
-   - Embeddings generated with OpenAI/Gemini
-   - Vector similarity search
-   - Context injected into AI prompt
-   - AI generates answer
+ - Document chunked into segments
+ - Embeddings generated with OpenAI/Gemini
+ - Vector similarity search
+ - Context injected into AI prompt
+ - AI generates answer
 10. **Answer signed** with oracle's private key (Ed25519)
 11. **Answer submitted** back to blockchain
 12. **AnswerProvided event** emitted
@@ -263,33 +263,33 @@ from langchain.vectorstores import Chroma
 from langchain.chat_models import ChatOpenAI
 
 def process_rag_query(document_text: str, question: str) -> str:
-    # Split document into chunks
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=200
-    )
-    chunks = text_splitter.split_text(document_text)
-    
-    # Generate embeddings
-    embeddings = OpenAIEmbeddings()
-    vectorstore = Chroma.from_texts(chunks, embeddings)
-    
-    # Similarity search
-    relevant_docs = vectorstore.similarity_search(question, k=3)
-    context = "\n\n".join([doc.page_content for doc in relevant_docs])
-    
-    # Generate answer
-    llm = ChatOpenAI(model="gpt-4", temperature=0)
-    prompt = f"""Based on the following context, answer the question.
-    
+ # Split document into chunks
+ text_splitter = RecursiveCharacterTextSplitter(
+ chunk_size=1000,
+ chunk_overlap=200
+ )
+ chunks = text_splitter.split_text(document_text)
+
+ # Generate embeddings
+ embeddings = OpenAIEmbeddings()
+ vectorstore = Chroma.from_texts(chunks, embeddings)
+
+ # Similarity search
+ relevant_docs = vectorstore.similarity_search(question, k=3)
+ context = "\n\n".join([doc.page_content for doc in relevant_docs])
+
+ # Generate answer
+ llm = ChatOpenAI(model="", temperature=0)
+ prompt = f"""Based on the following context, answer the question.
+
 Context:
 {context}
 
 Question: {question}
 
 Answer:"""
-    
-    return llm.predict(prompt)
+
+ return llm.predict(prompt)
 ```
 
 ### Encryption & Key Management
@@ -313,43 +313,43 @@ import hashlib
 import ed25519
 
 def sign_answer(answer: str, private_key: bytes) -> bytes:
-    # Hash the answer
-    message_hash = hashlib.sha256(answer.encode()).digest()
-    
-    # Sign with private key
-    signing_key = ed25519.SigningKey(private_key)
-    signature = signing_key.sign(message_hash)
-    
-    return signature
+ # Hash the answer
+ message_hash = hashlib.sha256(answer.encode()).digest()
+
+ # Sign with private key
+ signing_key = ed25519.SigningKey(private_key)
+ signature = signing_key.sign(message_hash)
+
+ return signature
 ```
 
 Frontend verifies signatures:
 
 ```typescript
 async function verifySignature(
-  answer: string,
-  signature: Uint8Array,
-  publicKey: Uint8Array
+ answer: string,
+ signature: Uint8Array,
+ publicKey: Uint8Array
 ): Promise<boolean> {
-  const encoder = new TextEncoder()
-  const message = encoder.encode(answer)
-  
-  const messageHash = await crypto.subtle.digest('SHA-256', message)
-  
-  const key = await crypto.subtle.importKey(
-    'raw',
-    publicKey,
-    { name: 'Ed25519' },
-    false,
-    ['verify']
-  )
-  
-  return await crypto.subtle.verify(
-    'Ed25519',
-    key,
-    signature,
-    messageHash
-  )
+ const encoder = new TextEncoder()
+ const message = encoder.encode(answer)
+
+ const messageHash = await crypto.subtle.digest('SHA-256', message)
+
+ const key = await crypto.subtle.importKey(
+ 'raw',
+ publicKey,
+ { name: 'Ed25519' },
+ false,
+ ['verify']
+ )
+
+ return await crypto.subtle.verify(
+ 'Ed25519',
+ key,
+ signature,
+ messageHash
+ )
 }
 ```
 
@@ -360,37 +360,37 @@ async function verifySignature(
 ### Data Flow Privacy
 
 **What Oracle Sees**:
-- ✅ Encrypted documents (binary blobs)
-- ✅ Questions (necessary for answering)
-- ✅ Decrypted documents (in TEE/secure enclave)
+- Encrypted documents (binary blobs)
+- Questions (necessary for answering)
+- Decrypted documents (in TEE/secure enclave)
 
 **What Oracle Never Sees**:
-- ❌ Raw documents before encryption
-- ❌ Encryption keys (in production TEE model)
-- ❌ User identity (blockchain pseudonymous)
+- Raw documents before encryption
+- Encryption keys (in production TEE model)
+- User identity (blockchain pseudonymous)
 
 **What Blockchain Sees**:
-- ✅ Document metadata (name, description)
-- ✅ Walrus blob IDs
-- ✅ Questions and answers
-- ✅ Timestamps and signatures
+- Document metadata (name, description)
+- Walrus blob IDs
+- Questions and answers
+- Timestamps and signatures
 
 **What Blockchain Never Sees**:
-- ❌ Raw document content
-- ❌ Encryption keys (production model)
+- Raw document content
+- Encryption keys (production model)
 
 ### Threat Model
 
 **Protected Against**:
-- ✅ Malicious storage providers (data encrypted)
-- ✅ Network eavesdropping (end-to-end encryption)
-- ✅ Rogue oracles (signatures prove authenticity)
-- ✅ Data tampering (blockchain immutability)
+- Malicious storage providers (data encrypted)
+- Network eavesdropping (end-to-end encryption)
+- Rogue oracles (signatures prove authenticity)
+- Data tampering (blockchain immutability)
 
 **Assumed Trust**:
-- ⚠️ Oracle processes queries honestly (mitigated by TEE)
-- ⚠️ AI provider (OpenAI/Gemini) respects privacy
-- ⚠️ User's browser/device is secure
+- Oracle processes queries honestly (mitigated by TEE)
+- AI provider (OpenAI/Gemini) respects privacy
+- User's browser/device is secure
 
 **Production Mitigations**:
 - **TEE/SGX** - Oracle runs in secure enclave
@@ -469,7 +469,7 @@ async function verifySignature(
 - Fast similarity search
 - Easy LangChain integration
 
-**Why GPT-4?**:
+**Why ?**:
 - Best answer quality
 - Good context understanding
 - Reliable API
@@ -485,11 +485,11 @@ async function verifySignature(
 
 ```typescript
 const response = await fetch(
-  `${WALRUS_AGGREGATOR}/v1/store?epochs=5`,
-  {
-    method: 'PUT',
-    body: encryptedFile,
-  }
+ `${WALRUS_AGGREGATOR}/v1/store?epochs=5`,
+ {
+ method: 'PUT',
+ body: encryptedFile,
+ }
 )
 ```
 
@@ -503,7 +503,7 @@ walrus store encrypted_file.enc --epochs 5
 
 ```typescript
 const response = await fetch(
-  `${WALRUS_AGGREGATOR}/v1/${blobId}`
+ `${WALRUS_AGGREGATOR}/v1/${blobId}`
 )
 const data = await response.arrayBuffer()
 ```
@@ -600,11 +600,11 @@ npm start
 ### Scalability
 
 - **Current**: Single oracle, sequential processing
-- **Potential**: 
-  - Multi-oracle parallel processing
-  - Batch answer submissions
-  - Local caching of frequently accessed docs
-  - Could handle 100+ queries/minute with optimization
+- **Potential**:
+ - Multi-oracle parallel processing
+ - Batch answer submissions
+ - Local caching of frequently accessed docs
+ - Could handle 100+ queries/minute with optimization
 
 ---
 

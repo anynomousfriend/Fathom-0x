@@ -11,12 +11,12 @@ Record Date: November 18, 2024
 CLASSIFICATION: HIGHLY CONFIDENTIAL - HIPAA PROTECTED
 
 CHIEF COMPLAINT
-Patient presents with recurring chest pain and shortness of breath over 
+Patient presents with recurring chest pain and shortness of breath over
 the past 3 weeks. Pain described as sharp, substernal, radiating to left arm.
 
 MEDICAL HISTORY
 - Type 2 Diabetes (diagnosed 2015)
-- Hypertension (diagnosed 2018)  
+- Hypertension (diagnosed 2018)
 - Previous myocardial infarction (2020)
 - Hyperlipidemia
 - Family history: Father died of heart disease at age 62
@@ -29,7 +29,7 @@ CURRENT MEDICATIONS
 5. Metoprolol 50mg twice daily (beta blocker)
 
 ALLERGIES
-⚠️ SEVERE ALLERGIES:
+ SEVERE ALLERGIES:
 - Penicillin (anaphylaxis - documented 2010)
 - Sulfa drugs (severe rash)
 - Latex (contact dermatitis)
@@ -106,14 +106,14 @@ Pending Procedures:
 - If severe multi-vessel disease: CABG consultation
 
 PATIENT EDUCATION
-✓ Discussed need for cardiac catheterization
-✓ Explained risks: bleeding, stroke, heart attack, death (<1%)
-✓ Lifestyle modifications counseled:
-  - Low sodium diet (<2000mg/day)
-  - Cardiac rehabilitation program enrollment
-  - Smoking cessation (patient currently smokes 1 pack/day)
-  - Weight loss goal: 25 lbs over 6 months
-  - Regular exercise after cardiac clearance
+ Discussed need for cardiac catheterization
+ Explained risks: bleeding, stroke, heart attack, death (<1%)
+ Lifestyle modifications counseled:
+ - Low sodium diet (<2000mg/day)
+ - Cardiac rehabilitation program enrollment
+ - Smoking cessation (patient currently smokes 1 pack/day)
+ - Weight loss goal: 25 lbs over 6 months
+ - Regular exercise after cardiac clearance
 
 FOLLOW-UP
 - Cardiology follow-up: 1 week post-procedure
@@ -133,9 +133,9 @@ GRACE Score: 145 (High risk - 12% mortality at 6 months)
 TIMI Score: 5 (22% risk of death/MI/revascularization at 14 days)
 
 CRITICAL REMINDER FOR ALL PROVIDERS:
-⚠️ PENICILLIN ALLERGY - USE ALTERNATIVE ANTIBIOTICS
-⚠️ SULFA ALLERGY - AVOID SULFONAMIDES
-⚠️ LATEX ALLERGY - USE NON-LATEX GLOVES AND EQUIPMENT
+ PENICILLIN ALLERGY - USE ALTERNATIVE ANTIBIOTICS
+ SULFA ALLERGY - AVOID SULFONAMIDES
+ LATEX ALLERGY - USE NON-LATEX GLOVES AND EQUIPMENT
 
 PROGNOSIS
 Without intervention: High risk of myocardial infarction or sudden cardiac death
@@ -143,7 +143,7 @@ With appropriate treatment: Good prognosis if revascularization successful
 Long-term management: Requires strict medication compliance, lifestyle changes
 
 PHYSICIAN NOTES
-Patient demonstrates good understanding of condition. Appears motivated to 
+Patient demonstrates good understanding of condition. Appears motivated to
 make lifestyle changes. Family support system in place (spouse present at visit).
 Discussed realistic expectations for recovery and long-term management.
 
@@ -152,7 +152,7 @@ Patient signed informed consent for cardiac catheterization and possible PCI.
 ---
 
 This medical record contains protected health information (PHI) under HIPAA.
-Unauthorized access or disclosure is strictly prohibited and subject to 
+Unauthorized access or disclosure is strictly prohibited and subject to
 criminal and civil penalties under federal law.
 
 Electronic Signature: Dr. Sarah Chen, MD

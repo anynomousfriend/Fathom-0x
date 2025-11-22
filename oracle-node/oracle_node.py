@@ -40,7 +40,7 @@ class FathomOracle:
     
     def __init__(self):
         """Initialize the oracle with Sui client configuration"""
-        print("🌊 Initializing Fathom Oracle Node...")
+        print("[FATHOM] Initializing Fathom Oracle Node...")
         
         # Validate configuration
         if not ORACLE_PRIVATE_KEY:
@@ -59,7 +59,7 @@ class FathomOracle:
         # Store processed queries to avoid duplicates
         self.processed_queries = set()
         
-        print(f"✅ Oracle initialized")
+        print(f"[OK] Oracle initialized")
         print(f"   RPC: {SUI_RPC_URL}")
         print(f"   Package: {CONTRACT_PACKAGE_ID}")
         print(f"   Config: {CONFIG_OBJECT_ID}")
@@ -82,11 +82,11 @@ class FathomOracle:
             response.raise_for_status()
             
             content = response.text
-            print(f"✅ Successfully fetched blob ({len(content)} bytes)")
+            print(f"[OK] Successfully fetched blob ({len(content)} bytes)")
             return content
             
         except Exception as e:
-            print(f"❌ Error fetching Walrus blob: {e}")
+            print(f"[ERROR] Error fetching Walrus blob: {e}")
             return None
     
     def process_query(self, document_content: str, question: str) -> str:
@@ -107,7 +107,7 @@ class FathomOracle:
         Returns:
             The generated answer
         """
-        print(f"🤖 Processing query: {question[:50]}...")
+        print(f"[AI] Processing query: {question[:50]}...")
         
         # Simulate AI processing time
         time.sleep(1)
@@ -127,7 +127,7 @@ class FathomOracle:
             f"{len(document_content)} characters of private data that was never exposed."
         )
         
-        print(f"✅ Generated answer ({len(answer)} chars)")
+        print(f"[OK] Generated answer ({len(answer)} chars)")
         return answer
     
     def sign_answer(self, answer: str, query_id: str) -> bytes:
@@ -193,15 +193,15 @@ class FathomOracle:
             result = txn.execute(gas_budget="10000000")
             
             if result.is_ok():
-                print(f"✅ Answer submitted successfully!")
+                print(f"[OK] Answer submitted successfully!")
                 print(f"   Digest: {result.digest}")
                 return True
             else:
-                print(f"❌ Transaction failed: {result.error}")
+                print(f"[ERROR] Transaction failed: {result.error}")
                 return False
                 
         except Exception as e:
-            print(f"❌ Error submitting answer: {e}")
+            print(f"[ERROR] Error submitting answer: {e}")
             return False
     
     def listen_for_queries(self):
@@ -231,7 +231,7 @@ class FathomOracle:
                 print("\n\n👋 Shutting down oracle node...")
                 break
             except Exception as e:
-                print(f"❌ Error in main loop: {e}")
+                print(f"[ERROR] Error in main loop: {e}")
                 time.sleep(POLL_INTERVAL)
     
     def process_single_query(
@@ -269,7 +269,7 @@ class FathomOracle:
         # Step 1: Fetch document from Walrus
         document_content = self.fetch_walrus_blob(document_blob_id)
         if not document_content:
-            print("❌ Failed to fetch document")
+            print("[ERROR] Failed to fetch document")
             return False
         
         # Step 2: Process query with AI
@@ -293,7 +293,7 @@ def main():
     print("""
     ╔═══════════════════════════════════════════════════════╗
     ║                                                       ║
-    ║            🌊 FATHOM ORACLE NODE 🌊                  ║
+    ║            [FATHOM] FATHOM ORACLE NODE [FATHOM]                  ║
     ║                                                       ║
     ║        Verifiable RAG for Private Data               ║
     ║                                                       ║
@@ -304,7 +304,7 @@ def main():
         oracle = FathomOracle()
         oracle.listen_for_queries()
     except Exception as e:
-        print(f"\n❌ Fatal error: {e}")
+        print(f"\n[ERROR] Fatal error: {e}")
         sys.exit(1)
 
 

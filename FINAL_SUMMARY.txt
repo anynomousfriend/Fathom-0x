@@ -1,0 +1,97 @@
+╔═══════════════════════════════════════════════════════════════╗
+║ ║
+║ FATHOM PROTOCOL - COMPLETE SETUP ║
+║ ║
+╚═══════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ EVERYTHING YOU NEED TO KNOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ TO START YOUR DEMO:
+
+ 1. Open terminal in project directory
+ 2. Run: ./START_FULL_SYSTEM.sh
+ 3. Wait for "SYSTEM READY!" message
+ 4. Open: http://localhost:3000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ DOCUMENTATION TO READ:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BEFORE DEMO:
+ README_DEMO_QUICK.md (1-page - read first!)
+ DEMO_DAY_PRESENTATION.md (complete guide)
+
+DURING DEMO:
+ Keep README_DEMO_QUICK.md open for reference
+ Follow the 2-minute demo flow
+
+AFTER DEMO:
+ Share GitHub link
+ Reference SYSTEM_READY.md for follow-ups
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ YOUR DEMO FLOW (2 MINUTES):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Part 1: Register Document (40 seconds)
+ • Click "Register Document"
+ • Upload demo_files/patient_record.txt
+ • Show: Encryption Walrus Blockchain
+ • Copy Document ID
+
+Part 2: Query Document (60 seconds)
+ • Click "Query Documents"
+ • Paste Document ID
+ • Ask: "What medications is the patient taking?"
+ • Show: Verified AI answer
+
+Part 3: Show Proof (20 seconds)
+ • Click transaction hash
+ • Open Sui Explorer
+ • Point to signature and timestamp
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ KEY TALKING POINTS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problem:
+ "Can't get verifiable AI answers on private data without exposing it"
+
+Solution:
+ "Walrus (storage) + TEE (processing) + Sui (verification)"
+
+Market:
+ "Healthcare, Finance, Legal - anywhere privacy is mandatory"
+
+Why Sui:
+ "Fast finality + Walrus integration + Move's object model"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ SYSTEM STATUS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ Oracle Node: Dependencies installed, configured
+ RAG API: Ready to process queries
+ Frontend: Builds successfully, ready to serve
+ Smart Contracts: Deployed on Sui testnet
+ Documentation: Complete presentation guides created
+ Tests: 13/13 passed
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ IF SOMETHING BREAKS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Quick Fix:
+ pkill -f "simple_rag|oracle_node|next"
+ ./START_FULL_SYSTEM.sh
+
+Backup Demo:
+ ./START_TEE_DEMO.sh --live
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ YOU'RE READY TO PRESENT! GOOD LUCK!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Starting Fathom-0x Protocol Demo..."
+echo "[START] Starting Fathom-0x Protocol Demo..."
 echo ""
 
 # Kill any existing processes
@@ -15,6 +15,6 @@ echo "🧹 Clearing cache..."
 rm -rf .next
 
 # Start dev server
-echo "🌊 Starting frontend..."
+echo "[FATHOM] Starting frontend..."
 npm run dev
 

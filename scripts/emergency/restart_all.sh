@@ -21,7 +21,7 @@ echo "⏳ Waiting 3 seconds for cleanup..."
 sleep 3
 
 echo ""
-echo "🚀 Starting services..."
+echo "[START] Starting services..."
 echo ""
 
 # Start frontend
@@ -34,7 +34,7 @@ echo "   Frontend PID: $FRONTEND_PID"
 sleep 5
 
 # Start oracle
-echo "🤖 Starting oracle..."
+echo "[ORACLE] Starting oracle..."
 cd ../oracle-node
 source venv/bin/activate 2>/dev/null || source venv/Scripts/activate 2>/dev/null
 python oracle_node.py > ../logs/oracle.log 2>&1 &
@@ -43,13 +43,13 @@ echo "   Oracle PID: $ORACLE_PID"
 sleep 3
 
 echo ""
-echo "✅ All services restarted!"
+echo "[OK] All services restarted!"
 echo ""
-echo "📊 Status:"
+echo "[STATUS] Status:"
 echo "   Frontend: http://localhost:3000 (PID: $FRONTEND_PID)"
 echo "   Oracle: Running (PID: $ORACLE_PID)"
 echo ""
-echo "📝 Logs:"
+echo "[NOTE] Logs:"
 echo "   Frontend: tail -f logs/frontend.log"
 echo "   Oracle: tail -f logs/oracle.log"
 echo ""

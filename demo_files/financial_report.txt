@@ -17,45 +17,45 @@ at $1.8M/month with current runway of only 8 months at existing cash levels.
 KEY FINANCIAL METRICS
 
 Revenue Performance:
-- Total Revenue: $8,247,392 (↑145% YoY, ↑28% QoQ)
-- Recurring Revenue (ARR): $24.5M (↑167% YoY)
-- One-time Revenue: $3.8M (↑89% YoY)
+- Total Revenue: $8,247,392 (145% YoY, 28% QoQ)
+- Recurring Revenue (ARR): $24.5M (167% YoY)
+- One-time Revenue: $3.8M (89% YoY)
 - Revenue Mix: 68% recurring, 32% one-time
 
 Customer Metrics:
-- Total Customers: 423 (↑156 new, ↓23 churned)
-- Enterprise Customers (>$100K ARR): 47 (↑12 QoQ)
-- Average Contract Value: $58,000 (↑$8,000 QoQ)
-- Customer Lifetime Value (LTV): $285,000 (↑32%)
-- Monthly Recurring Revenue (MRR): $2.04M (↑31% QoQ)
+- Total Customers: 423 (156 new, 23 churned)
+- Enterprise Customers (>$100K ARR): 47 (12 QoQ)
+- Average Contract Value: $58,000 ($8,000 QoQ)
+- Customer Lifetime Value (LTV): $285,000 (32%)
+- Monthly Recurring Revenue (MRR): $2.04M (31% QoQ)
 
 Growth Metrics:
 - Net Revenue Retention: 132% (healthy expansion)
-- Gross Revenue Retention: 94% (↓2% - needs attention)
-- Logo Retention: 91% (↓4% - churn increasing)
-- New Customer Acquisition: 156 (↑45% QoQ)
+- Gross Revenue Retention: 94% (2% - needs attention)
+- Logo Retention: 91% (4% - churn increasing)
+- New Customer Acquisition: 156 (45% QoQ)
 
 DETAILED REVENUE BREAKDOWN
 
 By Product Line:
 1. Enterprise SaaS Platform: $4.8M (58% of revenue)
-   - Year-over-year growth: 189%
-   - Margin: 82%
-   - Fastest growing segment
+ - Year-over-year growth: 189%
+ - Margin: 82%
+ - Fastest growing segment
 
 2. Professional Services: $2.1M (26% of revenue)
-   - Implementation and consulting
-   - Margin: 45%
-   - Supports enterprise sales
+ - Implementation and consulting
+ - Margin: 45%
+ - Supports enterprise sales
 
 3. API & Integration Services: $1.0M (12% of revenue)
-   - Usage-based pricing
-   - Margin: 91%
-   - High margin but small volume
+ - Usage-based pricing
+ - Margin: 91%
+ - High margin but small volume
 
 4. Training & Certification: $0.35M (4% of revenue)
-   - New product line (launched Q2 2024)
-   - Growing rapidly (+340% QoQ)
+ - New product line (launched Q2 2024)
+ - Growing rapidly (+340% QoQ)
 
 By Customer Segment:
 - Fortune 500 Enterprises: $3.2M (39%)
@@ -82,10 +82,10 @@ Sales & Marketing: $2.8M (34% of revenue)
 - Customer acquisition cost (CAC): $42,000 per enterprise customer
 - CAC payback period: 9 months (target: 12 months)
 - Marketing spend breakdown:
-  * Paid advertising: $380K
-  * Events & conferences: $240K
-  * Content marketing: $180K
-  * Marketing technology: $180K
+ * Paid advertising: $380K
+ * Events & conferences: $240K
+ * Content marketing: $180K
+ * Marketing technology: $180K
 
 Research & Development: $1.8M (22% of revenue)
 - Engineering team: 24 full-time engineers
@@ -128,15 +128,15 @@ Top 10 Customers (represent 42% of revenue):
 Churn Analysis:
 Lost Customers This Quarter: 23
 - Churn reason breakdown:
-  * Price too high: 35% (8 customers)
-  * Product limitations: 30% (7 customers)
-  * Moved to competitor: 22% (5 customers)
-  * Business closure: 13% (3 customers)
+ * Price too high: 35% (8 customers)
+ * Product limitations: 30% (7 customers)
+ * Moved to competitor: 22% (5 customers)
+ * Business closure: 13% (3 customers)
 
 Total churn impact: -$284K ARR
 
 Customer Acquisition:
-- Average sales cycle: 87 days (↓12 days - improving!)
+- Average sales cycle: 87 days (12 days - improving!)
 - Win rate: 28% (opportunities to closed-won)
 - Pipeline value: $18.2M (3.2x revenue target for Q4)
 
@@ -159,15 +159,15 @@ Pricing Comparison:
 PRODUCT METRICS
 
 Usage Statistics:
-- Daily Active Users: 8,420 (↑34% QoQ)
-- Weekly Active Users: 18,340 (↑28% QoQ)
-- Monthly Active Users: 31,200 (↑25% QoQ)
+- Daily Active Users: 8,420 (34% QoQ)
+- Weekly Active Users: 18,340 (28% QoQ)
+- Monthly Active Users: 31,200 (25% QoQ)
 - DAU/MAU Ratio: 27% (strong engagement)
 
 Feature Adoption:
 - Core platform: 100% of customers
-- Advanced analytics: 67% of customers (↑12%)
-- API integrations: 43% of customers (↑8%)
+- Advanced analytics: 67% of customers (12%)
+- API integrations: 43% of customers (8%)
 - Mobile app: 31% of customers (low - needs improvement)
 
 Product Satisfaction:
@@ -194,44 +194,44 @@ Ending Cash Balance: $14.2M
 STRATEGIC INITIATIVES (IN PROGRESS)
 
 1. Series B Fundraising
-   - Target: $40M at $180M valuation
-   - In discussions with 8 venture capital firms
-   - 3 term sheets expected by end of Q4
-   - Critical due to runway concerns
+ - Target: $40M at $180M valuation
+ - In discussions with 8 venture capital firms
+ - 3 term sheets expected by end of Q4
+ - Critical due to runway concerns
 
 2. Enterprise Expansion
-   - Launch dedicated enterprise sales team (6 new hires)
-   - Target: 30 new enterprise customers in Q4
-   - Focus on Fortune 1000 companies
+ - Launch dedicated enterprise sales team (6 new hires)
+ - Target: 30 new enterprise customers in Q4
+ - Focus on Fortune 1000 companies
 
 3. Product Development
-   - AI-powered analytics (launch: Q4 2024)
-   - Mobile app v2.0 (launch: Q1 2025)
-   - API marketplace (launch: Q2 2025)
+ - AI-powered analytics (launch: Q4 2024)
+ - Mobile app v2.0 (launch: Q1 2025)
+ - API marketplace (launch: Q2 2025)
 
 4. International Expansion
-   - Open London office (Q1 2025)
-   - Hire 5 EMEA sales reps
-   - Target: $5M European revenue in 2025
+ - Open London office (Q1 2025)
+ - Hire 5 EMEA sales reps
+ - Target: $5M European revenue in 2025
 
 RISK FACTORS
 
 Critical Risks:
 1. Runway: Only 8 months of cash remaining
-   - Mitigation: Series B fundraising actively underway
-   - Backup plan: Bridge financing from existing investors
+ - Mitigation: Series B fundraising actively underway
+ - Backup plan: Bridge financing from existing investors
 
 2. Increasing Churn: 5.5% monthly churn (up from 3.2%)
-   - Mitigation: Customer success team expansion (3 new hires)
-   - Product improvements based on churn feedback
+ - Mitigation: Customer success team expansion (3 new hires)
+ - Product improvements based on churn feedback
 
 3. Competitive Pressure: CompetitorX lowering prices
-   - Mitigation: Differentiate on features, not price
-   - Focus on enterprise customers less price-sensitive
+ - Mitigation: Differentiate on features, not price
+ - Focus on enterprise customers less price-sensitive
 
 4. Key Person Risk: CTO exploring external opportunities
-   - Mitigation: Retention package + equity refresh
-   - Succession planning initiated
+ - Mitigation: Retention package + equity refresh
+ - Succession planning initiated
 
 Medium Risks:
 - Sales hiring challenges (4 open roles, struggling to fill)
@@ -240,7 +240,7 @@ Medium Risks:
 
 FORECAST (Q4 2024)
 
-Revenue Projection: $9.8M (↑19% QoQ)
+Revenue Projection: $9.8M (19% QoQ)
 - Conservative case: $8.9M
 - Aggressive case: $11.2M
 
@@ -258,16 +258,16 @@ Key Assumptions:
 CONCLUSION & RECOMMENDATIONS
 
 Positives:
-✓ Strong revenue growth (145% YoY)
-✓ Excellent gross margins (85%)
-✓ Improving unit economics (CAC payback: 9 months)
-✓ High customer engagement (27% DAU/MAU)
+ Strong revenue growth (145% YoY)
+ Excellent gross margins (85%)
+ Improving unit economics (CAC payback: 9 months)
+ High customer engagement (27% DAU/MAU)
 
 Concerns:
-⚠ Limited runway (8 months)
-⚠ Increasing churn (5.5% monthly)
-⚠ High burn rate ($1.8M/month)
-⚠ Competitive pricing pressure
+ Limited runway (8 months)
+ Increasing churn (5.5% monthly)
+ High burn rate ($1.8M/month)
+ Competitive pricing pressure
 
 Critical Actions Required:
 1. URGENT: Close Series B funding by end of Q4

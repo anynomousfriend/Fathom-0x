@@ -150,7 +150,7 @@ npm run dev
 ```bash
 cd oracle-node
 python3 -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -217,13 +217,13 @@ tail -f logs/oracle.log
 1. Click "Register New Document"
 2. Select file: `_demo_files/demo-data/financial_report.txt`
 3. Enter:
-   - **Name**: "Q3 Financial Report"
-   - **Description**: "Sensitive financial data"
+ - **Name**: "Q3 Financial Report"
+ - **Description**: "Sensitive financial data"
 4. Click "Encrypt & Upload"
 5. Wait 5-10 seconds for:
-   - File encryption
-   - Walrus upload
-   - Blockchain registration
+ - File encryption
+ - Walrus upload
+ - Blockchain registration
 
 **If Walrus HTTP fails**:
 ```bash
@@ -299,10 +299,10 @@ docker build -t fathom-oracle .
 **Run**:
 ```bash
 docker run -d \
-  --name fathom-oracle \
-  --env-file .env \
-  -p 5000:5000 \
-  fathom-oracle
+ --name fathom-oracle \
+ --env-file .env \
+ -p 5000:5000 \
+ fathom-oracle
 ```
 
 **Deploy to Cloud** (AWS ECS example):
@@ -315,9 +315,9 @@ docker push YOUR_ECR_REPO/fathom-oracle:latest
 
 # Update service
 aws ecs update-service \
-  --cluster fathom-cluster \
-  --service fathom-oracle \
-  --force-new-deployment
+ --cluster fathom-cluster \
+ --service fathom-oracle \
+ --force-new-deployment
 ```
 
 ---
@@ -351,7 +351,7 @@ sui client publish --gas-budget 200000000
 **Solution**:
 ```bash
 # Check wallet on testnet
-sui client active-env  # Should be: testnet
+sui client active-env # Should be: testnet
 
 # Verify balance
 sui client gas
@@ -509,31 +509,31 @@ ADMIN_CAP_ID=0x...
 
 **Sui**:
 ```bash
-sui client gas                    # Check balance
-sui client active-address         # Get address
-sui client object OBJECT_ID       # View object
-sui client switch --env testnet   # Switch network
+sui client gas # Check balance
+sui client active-address # Get address
+sui client object OBJECT_ID # View object
+sui client switch --env testnet # Switch network
 ```
 
 **Walrus**:
 ```bash
-walrus store file.txt --epochs 5  # Upload
-walrus info                       # Check status
+walrus store file.txt --epochs 5 # Upload
+walrus info # Check status
 ```
 
 **Docker**:
 ```bash
-docker logs -f fathom-oracle      # View logs
-docker stop fathom-oracle         # Stop
-docker restart fathom-oracle      # Restart
+docker logs -f fathom-oracle # View logs
+docker stop fathom-oracle # Stop
+docker restart fathom-oracle # Restart
 ```
 
 **Process Management**:
 ```bash
-lsof -i :3000                     # Check frontend
-lsof -i :5000                     # Check RAG API
-pkill -f "next dev"               # Kill frontend
-pkill -f "oracle_node"            # Kill oracle
+lsof -i :3000 # Check frontend
+lsof -i :5000 # Check RAG API
+pkill -f "next dev" # Kill frontend
+pkill -f "oracle_node" # Kill oracle
 ```
 
 ---
@@ -560,4 +560,4 @@ pkill -f "oracle_node"            # Kill oracle
 
 ---
 
-**Setup complete! Ready to run the demo.** 🚀
+**Setup complete! Ready to run the demo.**

@@ -18,58 +18,78 @@
 
 ---
 
-## 🌊 What is Fathom Protocol?
+## Quick Start (Demo Day)
+
+**Start the entire system with one command:**
+
+```bash
+./START_FULL_SYSTEM.sh
+```
+
+This launches:
+- RAG API (Backend) on port 5000
+- Oracle Node (Blockchain listener)
+- Frontend (Next.js) on port 3000
+
+**Then open:** http://localhost:3000
+
+ **Full Demo Guide:** See [DEMO_DAY_PRESENTATION.md](DEMO_DAY_PRESENTATION.md) for complete presentation script
+ **Quick Reference:** See [README_DEMO_QUICK.md](README_DEMO_QUICK.md) for 1-page cheat sheet
+
+---
+
+## What is Fathom Protocol?
 
 Fathom Protocol solves the fundamental problem with AI: **you can't use powerful AI models without exposing your private data**.
 
 Traditional RAG (Retrieval-Augmented Generation) systems force an impossible choice:
-- ❌ **Cloud RAG** (OpenAI, AWS): Upload your data in plaintext → lose privacy
-- ❌ **Self-Hosted RAG**: Keep data private → lose AI capabilities
-- ❌ **Don't Use AI**: Keep privacy → lose competitive advantage
+- **Cloud RAG** (OpenAI, AWS): Upload your data in plaintext lose privacy
+- **Self-Hosted RAG**: Keep data private lose AI capabilities
+- **Don't Use AI**: Keep privacy lose competitive advantage
 
-**Fathom Protocol gives you both**: GPT-4 quality AI with cryptographic privacy guarantees.
+**Fathom Protocol gives you both**: quality AI with cryptographic privacy guarantees.
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 🔒 **End-to-End Encryption**
+### **End-to-End Encryption**
 Documents encrypted in your browser before upload using AES-256-GCM. Storage providers only see encrypted blobs.
 
-### 🗄️ **Decentralized Storage**
+### ️ **Decentralized Storage**
 Encrypted documents stored on Walrus, Sui's decentralized storage network. No single point of failure or control.
 
-### 🔐 **Verifiable Computation**
+### **Verifiable Computation**
 Oracle nodes process queries in Trusted Execution Environments (TEE). Every answer is cryptographically signed.
 
-### ⛓️ **Blockchain Verification**
+### ️ **Blockchain Verification**
 All operations recorded on Sui blockchain. Complete audit trail of who accessed what and when.
 
-### 🤖 **Real AI**
-Use GPT-4, Gemini, or local models for RAG queries. Not limited to toy models or simple keyword search.
+### **Real AI**
+Use , Gemini, or local models for RAG queries. Not limited to toy models or simple keyword search.
 
-### 📊 **On-Chain Proof**
+### **On-Chain Proof**
 Cryptographic signatures prove the oracle processed your query correctly. Don't trust, verify.
 
 ---
 
-## 🏗️ Architecture
+## ️ Architecture
 
 ```
-┌─────────────┐         ┌──────────────┐         ┌─────────────┐
-│   Browser   │────────▶│ Sui Contract │────────▶│   Oracle    │
-│  (Encrypt)  │         │  (Verify)    │         │    (TEE)    │
-└─────────────┘         └──────────────┘         └─────────────┘
-       │                        │                        │
-       │                        │                        ▼
-       │                        │                 ┌─────────────┐
-       │                        │                 │   Walrus    │
-       │                        │                 │  Storage    │
-       │                        │                 └─────────────┘
-       │                        │                        │
-       │                        ▼                        │
-       └──────────────── Verified Answer ◀───────────────┘
-                         + Signature
+┌─────────────┐ ┌──────────────┐ ┌─────────────┐
+│ Browser │────────▶│ Sui Contract │────────▶│ Oracle │
+│ (Encrypt) │ │ (Verify) │ │ (TEE) │
+└─────────────┘ └──────────────┘ └─────────────┘
+ │ │ │
+ │ │ ▼
+ │ │ ┌─────────────┐
+ │ │ │ Walrus │
+ │ │ │ Storage │
+ │ │ └─────────────┘
+ │ │ │
+ │ ▼ │
+ └──────────────── Verified Answer ◀───────────────┘
+ + Signature
 ```
 
 **Components**:
@@ -80,7 +100,7 @@ Cryptographic signatures prove the oracle processed your query correctly. Don't 
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -115,11 +135,11 @@ For detailed setup instructions, see [Setup Guide](docs/SETUP_AND_DEPLOYMENT.md)
 
 ---
 
-## 📖 Documentation
+## Documentation
 
 ### Core Documentation
 - **[Technical Architecture](docs/TECHNICAL_ARCHITECTURE.md)** - Complete technical implementation details
-- **[Demo Presentation](docs/DEMO_PRESENTATION.md)** - Presentation script and talking points  
+- **[Demo Presentation](docs/DEMO_PRESENTATION.md)** - Presentation script and talking points
 - **[Setup & Deployment](docs/SETUP_AND_DEPLOYMENT.md)** - Installation, configuration, and deployment guide
 
 ### Quick Links
@@ -130,7 +150,7 @@ For detailed setup instructions, see [Setup Guide](docs/SETUP_AND_DEPLOYMENT.md)
 
 ---
 
-## 🎯 How It Works
+## How It Works
 
 ### 1. **Register Document**
 ```typescript
@@ -171,9 +191,9 @@ Oracle fetches encrypted document, decrypts in TEE, processes with AI, signs ans
 ```typescript
 // Frontend verifies signature
 const verified = await verifySignature(
-  answer, 
-  signature, 
-  oraclePublicKey
+ answer,
+ signature,
+ oraclePublicKey
 )
 ```
 
@@ -181,33 +201,33 @@ User receives verified answer with cryptographic proof of authenticity.
 
 ---
 
-## 💼 Use Cases
+## Use Cases
 
-### 🏥 **Healthcare**
+### **Healthcare**
 - **Problem**: HIPAA prevents using cloud AI on patient records
-- **Solution**: Query medical data with GPT-4 while maintaining compliance
+- **Solution**: Query medical data with while maintaining compliance
 - **Value**: AI-powered diagnosis assistance with privacy guarantees
 
-### ⚖️ **Legal**
+### ️ **Legal**
 - **Problem**: Attorney-client privilege prevents cloud document analysis
 - **Solution**: AI research on case files without exposing confidential information
 - **Value**: Faster legal research with confidentiality intact
 
-### 💰 **Financial Services**
+### **Financial Services**
 - **Problem**: Regulations prevent sharing financial data with third parties
 - **Solution**: AI analysis of portfolios, reports, transactions with encryption
 - **Value**: Better financial insights without regulatory risk
 
-### 🏢 **Enterprise**
+### **Enterprise**
 - **Problem**: Proprietary data leakage concerns with cloud AI
 - **Solution**: Query internal documents with verifiable privacy
 - **Value**: Competitive intelligence without data exposure risk
 
 ---
 
-## 🛣️ Roadmap
+## ️ Roadmap
 
-### ✅ Phase 1: Core Protocol (Completed)
+### Phase 1: Core Protocol (Completed)
 - [x] Smart contract implementation (Sui Move)
 - [x] Client-side encryption (Web Crypto API)
 - [x] Walrus storage integration
@@ -215,19 +235,19 @@ User receives verified answer with cryptographic proof of authenticity.
 - [x] Frontend with wallet integration
 - [x] Cryptographic signatures
 
-### 🚧 Phase 2: TEE Integration (Q1 2025)
+### Phase 2: TEE Integration (Q1 2025)
 - [ ] Intel SGX deployment
 - [ ] Remote attestation
 - [ ] On-chain verification of attestation
 - [ ] Hardware security module integration
 
-### 📅 Phase 3: Multi-Oracle (Q2 2025)
+### Phase 3: Multi-Oracle (Q2 2025)
 - [ ] Multiple oracle nodes
 - [ ] Consensus mechanism (3-of-5 threshold)
 - [ ] Slashing for malicious oracles
 - [ ] Oracle staking and rewards
 
-### 🔮 Phase 4: Advanced Features (Q3-Q4 2025)
+### Phase 4: Advanced Features (Q3-Q4 2025)
 - [ ] Proxy re-encryption for key management
 - [ ] Zero-knowledge query proofs
 - [ ] Team/organization support
@@ -238,7 +258,7 @@ User receives verified answer with cryptographic proof of authenticity.
 
 ---
 
-## 🔬 Technical Stack
+## Technical Stack
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
@@ -254,7 +274,7 @@ User receives verified answer with cryptographic proof of authenticity.
 
 ---
 
-## 🎬 Demo
+## Demo
 
 ### Video Demo
 [![Fathom Protocol Demo](assets/demo-thumbnail.png)](https://youtu.be/your-demo-video)
@@ -273,7 +293,7 @@ User receives verified answer with cryptographic proof of authenticity.
 **Document Upload**
 <img src="assets/screenshot-upload.png" width="600" alt="Upload Interface"/>
 
-**Query Interface**  
+**Query Interface**
 <img src="assets/screenshot-query.png" width="600" alt="Query Interface"/>
 
 **Verified Answer**
@@ -283,7 +303,7 @@ User receives verified answer with cryptographic proof of authenticity.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for details.
 
@@ -304,20 +324,20 @@ cd ../contracts && sui move build
 ```
 
 ### Areas for Contribution
-- 🐛 Bug fixes and testing
-- 📝 Documentation improvements  
-- 🎨 UI/UX enhancements
-- 🔒 Security audits
-- 🌐 Internationalization
-- 🧪 Test coverage
+- Bug fixes and testing
+- Documentation improvements
+- UI/UX enhancements
+- Security audits
+- Internationalization
+- Test coverage
 
 ---
 
-## 🔒 Security
+## Security
 
 ### Threat Model
-- ✅ **Protected Against**: Malicious storage providers, network eavesdropping, rogue oracles, data tampering
-- ⚠️ **Trust Assumptions**: Oracle honesty (mitigated by TEE), user device security
+- **Protected Against**: Malicious storage providers, network eavesdropping, rogue oracles, data tampering
+- **Trust Assumptions**: Oracle honesty (mitigated by TEE), user device security
 
 ### Audits
 - Smart contract audit: *Pending*
@@ -330,7 +350,7 @@ We follow coordinated disclosure and offer bounties for critical findings.
 
 ---
 
-## 📊 Performance
+## Performance
 
 | Metric | Value |
 |--------|-------|
@@ -344,24 +364,24 @@ We follow coordinated disclosure and offer bounties for critical findings.
 
 ---
 
-## 🏆 Hackathon & Awards
+## Hackathon & Awards
 
 ### Sui Overflow Hackathon 2024
-- 🥇 Best Use of Walrus Storage
-- 🥇 Most Innovative Privacy Solution
-- 🥈 Best Smart Contract Design
+- Best Use of Walrus Storage
+- Most Innovative Privacy Solution
+- Best Smart Contract Design
 
 *Submission Category: DeFi & Infrastructure*
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Sui Foundation** - For the incredible blockchain infrastructure
 - **Walrus Team** - For decentralized storage that makes this possible
@@ -371,7 +391,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 📞 Contact
+## Contact
 
 - **Website**: https://fathom-protocol.com
 - **Email**: hello@fathom-protocol.com
@@ -381,7 +401,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🌟 Star History
+## Star History
 
 If you find Fathom Protocol useful, please consider giving us a star ⭐
 
@@ -389,7 +409,7 @@ If you find Fathom Protocol useful, please consider giving us a star ⭐
 
 <div align="center">
 
-**Built with ❤️ for a privacy-preserving future**
+**Built with ️ for a privacy-preserving future**
 
 [Documentation](docs/) • [Demo](http://localhost:3000) • [Discord](#) • [Twitter](#)
 

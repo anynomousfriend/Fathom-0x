@@ -6,7 +6,7 @@ echo ""
 
 # Check current RPC
 if [ -f "frontend/.env.local" ]; then
-    echo "📋 Current configuration:"
+    echo "[INFO] Current configuration:"
     grep "RPC_URL" frontend/.env.local 2>/dev/null || echo "   No RPC_URL found"
     echo ""
 fi
@@ -19,35 +19,35 @@ BACKUP_RPCS=(
     "https://fullnode.testnet.sui.io:443"
 )
 
-echo "🌐 Available backup RPCs:"
+echo "[SERVER] Available backup RPCs:"
 for i in "${!BACKUP_RPCS[@]}"; do
     echo "   $((i+1)). ${BACKUP_RPCS[$i]}"
 done
 echo ""
 
 # Test which RPC is responsive
-echo "🧪 Testing RPC endpoints..."
+echo "[TEST] Testing RPC endpoints..."
 WORKING_RPC=""
 for rpc in "${BACKUP_RPCS[@]}"; do
     echo -n "   Testing $rpc... "
     if curl -s -m 3 "$rpc" -I > /dev/null 2>&1; then
-        echo "✅ Working"
+        echo "[OK] Working"
         WORKING_RPC="$rpc"
         break
     else
-        echo "❌ Failed"
+        echo "[ERROR] Failed"
     fi
 done
 
 if [ -z "$WORKING_RPC" ]; then
     echo ""
-    echo "⚠️  WARNING: No responsive RPC found!"
+    echo "[WARNING]  WARNING: No responsive RPC found!"
     echo "   Using default: ${BACKUP_RPCS[0]}"
     WORKING_RPC="${BACKUP_RPCS[0]}"
 fi
 
 echo ""
-echo "🎯 Selected RPC: $WORKING_RPC"
+echo "[TARGET] Selected RPC: $WORKING_RPC"
 echo ""
 
 # Get current env values
@@ -56,7 +56,7 @@ CONFIG_ID=$(grep "CONFIG_OBJECT_ID" frontend/.env.local 2>/dev/null | cut -d'=' 
 WALRUS_AGG=$(grep "WALRUS_AGGREGATOR" frontend/.env.local 2>/dev/null | cut -d'=' -f2)
 
 # Update .env.local
-echo "📝 Updating frontend/.env.local..."
+echo "[NOTE] Updating frontend/.env.local..."
 cat > frontend/.env.local << EOF
 # Updated by emergency script at $(date)
 
@@ -67,7 +67,7 @@ NEXT_PUBLIC_CONFIG_OBJECT_ID=${CONFIG_ID:-YOUR_CONFIG_ID}
 NEXT_PUBLIC_WALRUS_AGGREGATOR=${WALRUS_AGG:-https://aggregator.walrus-testnet.walrus.space}
 EOF
 
-echo "   ✅ Configuration updated"
+echo "   [OK] Configuration updated"
 echo ""
 
 # Restart frontend
@@ -79,9 +79,9 @@ cd frontend
 npm run dev > ../logs/frontend.log 2>&1 &
 FRONTEND_PID=$!
 
-echo "   ✅ Frontend restarted (PID: $FRONTEND_PID)"
+echo "   [OK] Frontend restarted (PID: $FRONTEND_PID)"
 echo ""
-echo "📊 New Configuration:"
+echo "[STATUS] New Configuration:"
 echo "   RPC: $WORKING_RPC"
 echo "   Frontend: http://localhost:3000"
 echo ""

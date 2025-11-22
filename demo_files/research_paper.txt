@@ -70,12 +70,12 @@ Our quantum key generation algorithm achieves:
 
 Performance Comparison Table:
 ╔════════════════╦═══════════╦═══════════╦════════════╗
-║ Method         ║ Key Gen   ║ Key Size  ║ Security   ║
+║ Method ║ Key Gen ║ Key Size ║ Security ║
 ╠════════════════╬═══════════╬═══════════╬════════════╣
-║ RSA-2048       ║ 1000ms    ║ 2048 bits ║ Classical  ║
-║ ECC-256        ║ 150ms     ║ 256 bits  ║ Classical  ║
-║ Lattice-2048   ║ 2500ms    ║ 4096 bits ║ Quantum    ║
-║ Our Method     ║ 0.1ms     ║ 410 bits  ║ Quantum    ║
+║ RSA-2048 ║ 1000ms ║ 2048 bits ║ Classical ║
+║ ECC-256 ║ 150ms ║ 256 bits ║ Classical ║
+║ Lattice-2048 ║ 2500ms ║ 4096 bits ║ Quantum ║
+║ Our Method ║ 0.1ms ║ 410 bits ║ Quantum ║
 ╚════════════════╩═══════════╩═══════════╩════════════╝
 
 Finding 2: Security Properties
@@ -98,7 +98,7 @@ Finding 3: Practical Applicability
 
 Real-World Performance Benchmarks:
 - Blockchain transaction signing: 100,000 transactions/second
-  (vs 7 tx/s for Bitcoin, 30 tx/s for Ethereum)
+ (vs 7 tx/s for Bitcoin, 30 tx/s for Ethereum)
 - Secure messaging: 1M messages encrypted per second
 - Key exchange: 50,000 sessions established per second
 
@@ -146,22 +146,22 @@ TECHNICAL DETAILS
 Algorithm Specification:
 
 KeyGen(security_parameter λ):
-1. Sample quantum random bits: r ← Q-RNG(λ)
-2. Generate lattice basis: B ← LatticeGen(r, λ)
-3. Apply quantum transform: |ψ⟩ ← QFT(B)
-4. Measure in computational basis: sk ← Measure(|ψ⟩)
-5. Compute public key: pk ← Encode(sk, B)
+1. Sample quantum random bits: r Q-RNG(λ)
+2. Generate lattice basis: B LatticeGen(r, λ)
+3. Apply quantum transform: |ψ⟩ QFT(B)
+4. Measure in computational basis: sk Measure(|ψ⟩)
+5. Compute public key: pk Encode(sk, B)
 6. Return (sk, pk)
 
 Sign(message m, secret_key sk):
-1. Hash message: h ← SHA3-256(m)
-2. Generate quantum nonce: n ← Q-RNG(256)
-3. Compute quantum signature: σ ← Q-Sign(h, sk, n)
+1. Hash message: h SHA3-256(m)
+2. Generate quantum nonce: n Q-RNG(256)
+3. Compute quantum signature: σ Q-Sign(h, sk, n)
 4. Return (σ, n)
 
 Verify(message m, signature σ, public_key pk):
-1. Hash message: h ← SHA3-256(m)
-2. Check signature validity: valid ← Q-Verify(h, σ, pk)
+1. Hash message: h SHA3-256(m)
+2. Check signature validity: valid Q-Verify(h, σ, pk)
 3. Return valid ∈ {true, false}
 
 Error Correction:
@@ -248,16 +248,16 @@ Special thanks to Dr. Michael Chen for insights on lattice-based cryptography.
 REFERENCES
 
 [1] Shor, P. (1994). "Algorithms for Quantum Computation: Discrete Logarithms
-    and Factoring". Proceedings of FOCS.
+ and Factoring". Proceedings of FOCS.
 
 [2] Regev, O. (2005). "On Lattices, Learning with Errors, Random Linear Codes,
-    and Cryptography". Proceedings of STOC.
+ and Cryptography". Proceedings of STOC.
 
 [3] Peikert, C. (2016). "A Decade of Lattice Cryptography". Foundations and
-    Trends in Theoretical Computer Science.
+ Trends in Theoretical Computer Science.
 
 [4] Arute, F. et al. (2019). "Quantum supremacy using a programmable
-    superconducting processor". Nature.
+ superconducting processor". Nature.
 
 [Full reference list: 47 citations - see appendix]
 

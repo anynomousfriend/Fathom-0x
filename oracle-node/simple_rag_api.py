@@ -214,7 +214,7 @@ def query_document():
         context = "\n\n".join(relevant_chunks)
         
         # Step 5: Query LLM
-        print("🤖 Querying AI model...")
+        print("Querying AI model...")
         answer = None
         
         # Try Gemini first (free tier)
@@ -228,7 +228,7 @@ def query_document():
         if not answer:
             return jsonify({'error': 'No LLM configured. Please set GEMINI_API_KEY or OPENAI_API_KEY'}), 500
         
-        print(f"✅ Answer generated: {len(answer)} characters")
+        print(f"[OK] Answer generated: {len(answer)} characters")
         
         return jsonify({
             'answer': answer,
@@ -239,8 +239,8 @@ def query_document():
     
     except Exception as e:
         import traceback
-        print(f"❌ Error processing query: {e}")
-        print(f"📋 Full traceback:")
+        print(f"[ERROR] Error processing query: {e}")
+        print(f"[INFO] Full traceback:")
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
@@ -270,13 +270,13 @@ def query_mock():
     })
 
 if __name__ == '__main__':
-    print("🚀 Starting Fathom RAG API...")
-    print(f"📍 Walrus Aggregator: {WALRUS_AGGREGATOR}")
-    print(f"🔑 Gemini API: {'Configured' if GEMINI_API_KEY else 'Not configured'}")
-    print(f"🔑 OpenAI API: {'Configured' if OPENAI_API_KEY else 'Not configured'}")
-    print("\n💡 Get free API key:")
+    print("Starting Fathom RAG API...")
+    print(f"Walrus Aggregator: {WALRUS_AGGREGATOR}")
+    print(f"Gemini API: {'Configured' if GEMINI_API_KEY else 'Not configured'}")
+    print(f"OpenAI API: {'Configured' if OPENAI_API_KEY else 'Not configured'}")
+    print("\nGet free API key:")
     print("   Gemini: https://makersuite.google.com/app/apikey")
     print("   OpenAI: https://platform.openai.com/api-keys")
-    print("\n🌐 Server starting on http://localhost:5000")
+    print("\n[SERVER] Server starting on http://localhost:5000")
     
     app.run(host='0.0.0.0', port=5000, debug=True)

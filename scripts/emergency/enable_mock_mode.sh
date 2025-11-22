@@ -11,7 +11,7 @@ sleep 2
 
 # Check if mock responses file exists
 if [ ! -f "oracle-node/mock_responses.json" ]; then
-    echo "📝 Creating mock_responses.json..."
+    echo "[NOTE] Creating mock_responses.json..."
     cat > oracle-node/mock_responses.json << 'EOF'
 {
   "What was the Q3 revenue?": {
@@ -35,7 +35,7 @@ EOF
 fi
 
 # Start oracle with mock mode
-echo "🤖 Starting oracle in MOCK MODE..."
+echo "[ORACLE] Starting oracle in MOCK MODE..."
 cd oracle-node
 source venv/bin/activate 2>/dev/null || source venv/Scripts/activate 2>/dev/null
 
@@ -46,18 +46,18 @@ python oracle_node.py > ../logs/oracle_mock.log 2>&1 &
 ORACLE_PID=$!
 
 echo ""
-echo "✅ Mock mode enabled!"
+echo "[OK] Mock mode enabled!"
 echo ""
-echo "📊 Status:"
+echo "[STATUS] Status:"
 echo "   Oracle PID: $ORACLE_PID"
 echo "   Mode: MOCK (instant responses)"
 echo ""
-echo "📝 Mock responses available for:"
+echo "[NOTE] Mock responses available for:"
 echo "   - What was the Q3 revenue?"
 echo "   - What medications is the patient taking?"
 echo "   - What are the key findings?"
 echo "   - Summarize the document"
 echo ""
-echo "📝 Logs: tail -f logs/oracle_mock.log"
+echo "[NOTE] Logs: tail -f logs/oracle_mock.log"
 echo ""
 echo "⚡ Queries will now return INSTANT responses!"
