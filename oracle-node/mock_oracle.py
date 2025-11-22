@@ -119,7 +119,7 @@ class MockOracle:
     def __init__(self):
         self.query_count = 0
         self.start_time = datetime.now()
-        print("🚀 Mock Oracle Node Starting...")
+        print("START Mock Oracle Node Starting...")
         print("=" * 60)
         print("⚠️  DEMO MODE: This is a mock oracle for demonstration")
         print("    Real implementation would use TEE hardware + pysui SDK")
@@ -232,7 +232,7 @@ class MockOracle:
             "answer_preview": answer[:200] + "..." if len(answer) > 200 else answer
         }
         
-        print(f"\n✅ Query Processed Successfully!")
+        print(f"\nOK Query Processed Successfully!")
         print(f"{'='*60}\n")
         
         return result
@@ -304,7 +304,7 @@ class MockOracle:
         print(f"Total Queries Processed: {self.query_count}")
         print(f"Oracle Uptime: {datetime.now() - self.start_time}")
         print(f"Average Processing Time: ~2 seconds")
-        print(f"\n✅ All sample queries processed successfully!")
+        print(f"\nOK All sample queries processed successfully!")
         print(f"{'='*60}\n")
         
         return results
@@ -324,7 +324,7 @@ class MockOracle:
                 
                 query_text = input("❓ Your question: ").strip()
                 if not query_text:
-                    print("❌ Query cannot be empty")
+                    print("ERROR Query cannot be empty")
                     continue
                 
                 query_data = {
@@ -343,7 +343,7 @@ class MockOracle:
                 print("\n\n👋 Exiting interactive mode...")
                 break
             except Exception as e:
-                print(f"❌ Error: {e}")
+                print(f"ERROR Error: {e}")
 
 def main():
     """Main entry point"""

@@ -156,7 +156,7 @@ export default function QueryPage() {
             throw new Error('Encryption key not found for this document. Please register a new document and save the encryption key.')
           }
           
-          console.log('✅ Keys found:', {
+          console.log('OK Keys found:', {
             key: docKeys.key.substring(0, 10) + '...',
             iv: docKeys.iv.substring(0, 10) + '...'
           })
@@ -178,10 +178,10 @@ export default function QueryPage() {
           answer = data.answer
           modelUsed = data.model_used || 'rag'
           
-          console.log('✅ Real RAG response received')
+          console.log('OK Real RAG response received')
           
         } catch (ragError: any) {
-          console.error('❌ Real RAG failed:', ragError)
+          console.error('ERROR Real RAG failed:', ragError)
           setError(`RAG unavailable: ${ragError.message}. Using demo mode.`)
           answer = getDemoResponse(question)
           modelUsed = 'demo-fallback'

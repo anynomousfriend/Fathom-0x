@@ -331,7 +331,7 @@ class TEESimulator:
         print("="*70)
         print(f"\n📄 Document: {doc_name}")
         print(f"❓ Question: {query}")
-        print(f"\n💡 Answer:")
+        print(f"\nINFO Answer:")
         print(f"   {answer}")
         print(f"\n🔗 Transaction: https://suiexplorer.com/txblock/{tx_hash}?network=testnet")
         print(f"📊 Mode: Real RAG - GEMINI")
@@ -367,7 +367,7 @@ def main():
         simulator.demo_full_flow()
         
         print("\n" + "="*70)
-        print("💡 TIP: Run with '--live' flag for interactive demo mode")
+        print("INFO TIP: Run with '--live' flag for interactive demo mode")
         print("   Example: python demo_tee_simulation.py --live")
         print("="*70 + "\n")
 

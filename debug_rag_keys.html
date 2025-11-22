@@ -14,10 +14,10 @@ output.textContent += '\n\n';
 output.textContent += 'Blob IDs found: ' + Object.keys(keys).length;
 
 if (Object.keys(keys).length === 0) {
-    output.textContent += '\n\n❌ NO KEYS FOUND!';
+    output.textContent += '\n\nERROR NO KEYS FOUND!';
     output.textContent += '\nThe encryption key was not saved when you registered.';
 } else {
-    output.textContent += '\n\n✅ Keys found for these blobs:';
+    output.textContent += '\n\nOK Keys found for these blobs:';
     Object.keys(keys).forEach(blobId => {
         output.textContent += '\n\n- Blob: ' + blobId.substring(0, 30) + '...';
         output.textContent += '\n  Key: ' + (keys[blobId].key || 'MISSING').substring(0, 20) + '...';

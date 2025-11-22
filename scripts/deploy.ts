@@ -20,7 +20,7 @@ interface DeploymentAddresses {
 }
 
 async function main() {
-  console.log('🚀 Deploying Fathom Contract to Sui Testnet...\n');
+  console.log('START Deploying Fathom Contract to Sui Testnet...\n');
 
   try {
     // Step 1: Build the contract
@@ -28,7 +28,7 @@ async function main() {
     process.chdir(path.join(__dirname, '../contracts'));
     
     const buildOutput = execSync('sui move build', { encoding: 'utf-8' });
-    console.log('✅ Contract built successfully\n');
+    console.log('OK Contract built successfully\n');
 
     // Step 2: Publish to testnet
     console.log('📤 Publishing to Sui Testnet...');
@@ -78,7 +78,7 @@ async function main() {
     const outputPath = path.join(__dirname, '../deployed_addresses.json');
     fs.writeFileSync(outputPath, JSON.stringify(addresses, null, 2));
     
-    console.log('✅ Contract deployed successfully!\n');
+    console.log('OK Contract deployed successfully!\n');
     console.log('📍 Deployment Addresses:');
     console.log('   ├─ Package ID:     ', packageId);
     console.log('   ├─ Admin Cap ID:   ', adminCapId);
@@ -89,14 +89,14 @@ async function main() {
     console.log(`   https://suiscan.xyz/testnet/object/${packageId}\n`);
 
     // Step 5: Instructions
-    console.log('📝 Next Steps:');
+    console.log('NOTE Next Steps:');
     console.log('   1. Copy these addresses to oracle-node/.env');
     console.log('   2. Copy these addresses to frontend/.env.local');
     console.log('   3. Start the oracle: cd oracle-node && python3 oracle_node.py');
     console.log('   4. Start the frontend: cd frontend && npm run dev\n');
 
   } catch (error: any) {
-    console.error('❌ Deployment failed:', error.message);
+    console.error('ERROR Deployment failed:', error.message);
     process.exit(1);
   }
 }

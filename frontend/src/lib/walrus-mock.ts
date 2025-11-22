@@ -40,7 +40,7 @@ export async function uploadToWalrusMock(
   // Generate realistic blob ID
   const blobId = generateMockBlobId();
 
-  console.log('✅ Mock upload successful!', {
+  console.log('OK Mock upload successful!', {
     blobId: blobId.substring(0, 20) + '...',
     size: data.size,
     note: 'Using mock mode - Walrus testnet unavailable'

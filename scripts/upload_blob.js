@@ -11,11 +11,11 @@ const fs = require('fs');
 const path = require('path');
 
 function uploadToWalrus(filePath) {
-  console.log('🌊 Uploading to Walrus Storage...\n');
+  console.log('FATHOM Uploading to Walrus Storage...\n');
 
   // Check if file exists
   if (!fs.existsSync(filePath)) {
-    console.error(`❌ Error: File not found: ${filePath}`);
+    console.error(`ERROR Error: File not found: ${filePath}`);
     process.exit(1);
   }
 
@@ -45,7 +45,7 @@ function uploadToWalrus(filePath) {
     if (blobIdMatch) {
       const blobId = blobIdMatch[1];
       
-      console.log('\n✅ Upload successful!\n');
+      console.log('\nOK Upload successful!\n');
       console.log('📍 Blob Information:');
       console.log(`   ├─ Blob ID: ${blobId}`);
       console.log(`   ├─ File:    ${fileName}`);
@@ -54,7 +54,7 @@ function uploadToWalrus(filePath) {
       console.log('🔗 Access URL:');
       console.log(`   https://aggregator.walrus-testnet.walrus.space/v1/${blobId}\n`);
       
-      console.log('📝 Next Steps:');
+      console.log('NOTE Next Steps:');
       console.log('   1. Save this Blob ID');
       console.log('   2. Use it when registering a document in the frontend');
       console.log('   3. Or update your .env file with: WALRUS_BLOB_ID=' + blobId + '\n');
@@ -77,13 +77,13 @@ function uploadToWalrus(filePath) {
 
       return blobId;
     } else {
-      console.error('❌ Could not extract Blob ID from output');
+      console.error('ERROR Could not extract Blob ID from output');
       process.exit(1);
     }
 
   } catch (error) {
-    console.error('❌ Upload failed:', error.message);
-    console.log('\n💡 Make sure you have:');
+    console.error('ERROR Upload failed:', error.message);
+    console.log('\nINFO Make sure you have:');
     console.log('   1. Installed Walrus CLI');
     console.log('   2. Configured your Walrus wallet');
     console.log('   3. Have enough WAL tokens for storage\n');

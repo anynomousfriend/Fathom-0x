@@ -41,7 +41,7 @@ export async function uploadToWalrus(
       epochs: 5, // Store for 5 epochs (configurable)
     });
 
-    console.log('✅ Walrus upload successful!', {
+    console.log('OK Walrus upload successful!', {
       blobId: result.blobId.substring(0, 20) + '...',
       size: result.size,
       endEpoch: result.endEpoch,
@@ -49,7 +49,7 @@ export async function uploadToWalrus(
 
     return result;
   } catch (error) {
-    console.error('❌ Walrus upload error:', error);
+    console.error('ERROR Walrus upload error:', error);
     console.warn('⚠️ Falling back to mock mode - Walrus testnet may be down or rate-limited');
     
     // Fall back to mock mode
@@ -67,7 +67,7 @@ export async function retrieveFromWalrus(blobId: string): Promise<Blob> {
 
     const blob = await walrusClient.download(blobId);
     
-    console.log('✅ Retrieved blob successfully:', {
+    console.log('OK Retrieved blob successfully:', {
       blobId: blobId.substring(0, 20) + '...',
       size: blob.size,
       type: blob.type
@@ -75,7 +75,7 @@ export async function retrieveFromWalrus(blobId: string): Promise<Blob> {
 
     return blob;
   } catch (error) {
-    console.error('❌ Walrus retrieval error:', error);
+    console.error('ERROR Walrus retrieval error:', error);
     throw error;
   }
 }
@@ -87,7 +87,7 @@ export async function checkBlobExists(blobId: string): Promise<boolean> {
   try {
     return await walrusClient.exists(blobId);
   } catch (error) {
-    console.error('❌ Error checking blob existence:', error);
+    console.error('ERROR Error checking blob existence:', error);
     return false;
   }
 }
@@ -103,7 +103,7 @@ export async function getBlobInfo(blobId: string): Promise<{
   try {
     return await walrusClient.getMetadata(blobId);
   } catch (error) {
-    console.error('❌ Error getting blob metadata:', error);
+    console.error('ERROR Error getting blob metadata:', error);
     return { exists: false };
   }
 }

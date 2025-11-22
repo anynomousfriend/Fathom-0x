@@ -129,7 +129,7 @@ export class WalrusClient {
         }
 
         const result: WalrusUploadResponse = await response.json();
-        console.log('✅ Upload successful!', result);
+        console.log('OK Upload successful!', result);
 
         // Parse response - handle both newly created and already certified
         let blobId: string;
@@ -169,14 +169,14 @@ export class WalrusClient {
           endEpoch,
         };
       } catch (error) {
-        console.warn(`❌ Endpoint ${endpoint} failed:`, error);
+        console.warn(`ERROR Endpoint ${endpoint} failed:`, error);
         lastError = error as Error;
         continue;
       }
     }
 
     // All endpoints failed
-    console.error('❌ All Walrus endpoints failed');
+    console.error('ERROR All Walrus endpoints failed');
     throw new Error(`Walrus upload failed: ${lastError?.message || 'All endpoints unavailable'}`);
   }
 
@@ -207,7 +207,7 @@ export class WalrusClient {
 
         const blob = await response.blob();
         
-        console.log('✅ Download successful:', {
+        console.log('OK Download successful:', {
           blobId: blobId.substring(0, 20) + '...',
           size: blob.size,
           type: blob.type,
@@ -215,7 +215,7 @@ export class WalrusClient {
 
         return blob;
       } catch (error) {
-        console.warn(`❌ Endpoint ${endpoint} failed:`, error);
+        console.warn(`ERROR Endpoint ${endpoint} failed:`, error);
         lastError = error as Error;
         continue;
       }
