@@ -1,0 +1,160 @@
+CONFIDENTIAL PATIENT MEDICAL RECORD
+====================================
+
+Patient ID: MRN-2024-48392
+Name: [REDACTED FOR PRIVACY]
+Date of Birth: 1978-03-15
+Hospital: St. Mary's Medical Center
+Attending Physician: Dr. Sarah Chen, MD
+Record Date: November 18, 2024
+
+CLASSIFICATION: HIGHLY CONFIDENTIAL - HIPAA PROTECTED
+
+CHIEF COMPLAINT
+Patient presents with recurring chest pain and shortness of breath over 
+the past 3 weeks. Pain described as sharp, substernal, radiating to left arm.
+
+MEDICAL HISTORY
+- Type 2 Diabetes (diagnosed 2015)
+- Hypertension (diagnosed 2018)  
+- Previous myocardial infarction (2020)
+- Hyperlipidemia
+- Family history: Father died of heart disease at age 62
+
+CURRENT MEDICATIONS
+1. Metformin 1000mg twice daily (diabetes)
+2. Lisinopril 20mg once daily (blood pressure)
+3. Atorvastatin 40mg once daily (cholesterol)
+4. Aspirin 81mg once daily (antiplatelet)
+5. Metoprolol 50mg twice daily (beta blocker)
+
+ALLERGIES
+⚠️ SEVERE ALLERGIES:
+- Penicillin (anaphylaxis - documented 2010)
+- Sulfa drugs (severe rash)
+- Latex (contact dermatitis)
+
+VITAL SIGNS (Current Visit)
+- Blood Pressure: 152/94 mmHg (elevated)
+- Heart Rate: 88 bpm
+- Respiratory Rate: 18 breaths/min
+- Temperature: 98.6°F
+- O2 Saturation: 96% on room air
+- Weight: 195 lbs (BMI: 29.4 - overweight)
+
+LABORATORY RESULTS (Nov 15, 2024)
+- Troponin I: 0.08 ng/mL (slightly elevated, normal <0.04)
+- BNP: 245 pg/mL (elevated, suggests heart strain)
+- HbA1c: 7.8% (diabetes not well controlled)
+- LDL Cholesterol: 142 mg/dL (above target)
+- Creatinine: 1.3 mg/dL (mild kidney impairment)
+
+DIAGNOSTIC TESTS
+
+ECG (Electrocardiogram):
+- Sinus rhythm
+- ST segment depression in leads V4-V6
+- Suggests myocardial ischemia
+- Compared to baseline ECG from 2023: new changes present
+
+Echocardiogram:
+- Left ventricular ejection fraction: 48% (mildly reduced, normal >55%)
+- Mild left ventricular hypertrophy
+- No valvular abnormalities
+- Mild mitral regurgitation
+
+Stress Test (Scheduled):
+- Patient unable to complete due to chest pain at 5 minutes
+- Test terminated early
+- Suggests significant coronary artery disease
+
+Cardiac Catheterization (Recommended):
+- High suspicion for coronary blockages
+- Scheduled for Nov 22, 2024
+
+ASSESSMENT & DIAGNOSIS
+
+Primary Diagnosis: Unstable Angina / Acute Coronary Syndrome
+- High risk for myocardial infarction
+- Requires urgent cardiac catheterization
+- Possible need for coronary intervention (stent or CABG)
+
+Secondary Diagnoses:
+1. Uncontrolled Type 2 Diabetes Mellitus
+2. Hypertension (poorly controlled)
+3. Hyperlipidemia (above target despite statin)
+4. Chronic Kidney Disease Stage 2
+
+TREATMENT PLAN
+
+Immediate Actions:
+1. Admit to cardiac care unit for monitoring
+2. Start IV heparin anticoagulation
+3. Continue aspirin and add clopidogrel 300mg loading dose
+4. Nitroglycerin for chest pain PRN
+5. NPO after midnight for catheterization
+
+Medications Adjusted:
+- Increase atorvastatin to 80mg daily (high-intensity statin)
+- Add metformin extended release 2000mg daily
+- Increase lisinopril to 40mg daily
+- Continue metoprolol
+
+Pending Procedures:
+- Cardiac catheterization Nov 22 (confirmed)
+- Possible percutaneous coronary intervention (PCI)
+- If severe multi-vessel disease: CABG consultation
+
+PATIENT EDUCATION
+✓ Discussed need for cardiac catheterization
+✓ Explained risks: bleeding, stroke, heart attack, death (<1%)
+✓ Lifestyle modifications counseled:
+  - Low sodium diet (<2000mg/day)
+  - Cardiac rehabilitation program enrollment
+  - Smoking cessation (patient currently smokes 1 pack/day)
+  - Weight loss goal: 25 lbs over 6 months
+  - Regular exercise after cardiac clearance
+
+FOLLOW-UP
+- Cardiology follow-up: 1 week post-procedure
+- Primary care follow-up: 2 weeks
+- Diabetes management: Endocrinology referral
+- Cardiac rehabilitation: Start within 2 weeks post-discharge
+
+SOCIAL HISTORY
+- Occupation: Software engineer (sedentary job)
+- Smoking: 1 pack per day x 20 years (20 pack-years)
+- Alcohol: Occasional, 2-3 drinks per week
+- Exercise: Minimal, <30 minutes per week
+- Stress level: High (reports work-related stress)
+
+RISK STRATIFICATION
+GRACE Score: 145 (High risk - 12% mortality at 6 months)
+TIMI Score: 5 (22% risk of death/MI/revascularization at 14 days)
+
+CRITICAL REMINDER FOR ALL PROVIDERS:
+⚠️ PENICILLIN ALLERGY - USE ALTERNATIVE ANTIBIOTICS
+⚠️ SULFA ALLERGY - AVOID SULFONAMIDES
+⚠️ LATEX ALLERGY - USE NON-LATEX GLOVES AND EQUIPMENT
+
+PROGNOSIS
+Without intervention: High risk of myocardial infarction or sudden cardiac death
+With appropriate treatment: Good prognosis if revascularization successful
+Long-term management: Requires strict medication compliance, lifestyle changes
+
+PHYSICIAN NOTES
+Patient demonstrates good understanding of condition. Appears motivated to 
+make lifestyle changes. Family support system in place (spouse present at visit).
+Discussed realistic expectations for recovery and long-term management.
+
+Patient signed informed consent for cardiac catheterization and possible PCI.
+
+---
+
+This medical record contains protected health information (PHI) under HIPAA.
+Unauthorized access or disclosure is strictly prohibited and subject to 
+criminal and civil penalties under federal law.
+
+Electronic Signature: Dr. Sarah Chen, MD
+Date: November 18, 2024, 14:32 EST
+NPI: 1234567890

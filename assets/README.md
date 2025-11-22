@@ -1,44 +1,30 @@
 # Assets
 
-This folder contains:
-- Logo files (512x512 PNG)
-- Demo screenshots
-- Architecture diagrams
-- Video thumbnails
+This folder contains branding and visual assets for Fathom Protocol.
 
-## Logo
+## Files
 
-Create a logo using:
-- Canva: Search for "Ocean Wave" or "Brain Network" templates
-- Figma: Design a custom logo with wave + tech elements
-- Tools: Use tools like Logo.com or Looka
+### logo-svg.svg
+- **Fathom Protocol logo** in SVG format
+- Use in presentations, documentation, and web pages
+- Transparent background
+- Size: 185 KB
 
-Recommended style:
-- Blue/Cyan color scheme (ocean theme)
-- Wave or water droplet iconography
-- Clean, modern, tech-focused
+## Usage
 
-## Screenshots
+### In Presentations:
+- Upload to Canva or Google Slides
+- Place on title slide and closing slide
+- Recommended size: 200-300px width
 
-Capture these screenshots for the README:
-1. Landing page with wallet connect
-2. Document list interface
-3. Query submission form
-4. Verified answer display
-5. Transaction on Sui Explorer
+### In Documentation:
+- Reference in README.md as: `assets/logo-svg.svg`
+- Display with: `![Fathom Logo](assets/logo-svg.svg)`
 
-## Architecture Diagram
+### In Frontend:
+- Located at: `frontend/public/logo.svg`
+- Use this version for web pages
 
-Create a flow diagram showing:
-```
-User → Sui Contract → Oracle Node → Walrus Storage
-  ↑                        ↓
-  └────────────────────────┘
-       (Verified Answer)
-```
+---
 
-Use tools like:
-- Draw.io
-- Excalidraw
-- Figma
-- Lucidchart
+**For demo sample documents, see: `demo_files/`**

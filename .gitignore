@@ -53,5 +53,12 @@ ENV/
 *.tmp
 .cache/
 
-# Documentation
-docs/
+# Demo and presentation files (local reference only - not for public repo)
+docs/DEMO_PRESENTATION.md
+docs/CANVA_PRESENTATION.md
+scripts/DEMO_DAY_CHECKLIST.md
+scripts/CANVA_SLIDES_TEXT.md
+scripts/GOOGLE_SLIDES_SCRIPT.md
+
+# Logs directory
+logs/
