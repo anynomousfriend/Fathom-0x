@@ -12,7 +12,7 @@
 [![Sui Network](https://img.shields.io/badge/Sui-Testnet-blue)](https://sui.io)
 [![Walrus Storage](https://img.shields.io/badge/Walrus-Integrated-cyan)](https://walrus.site)
 
-[Live Demo](http://localhost:3000) • [Documentation](docs/) • [Architecture](docs/TECHNICAL_ARCHITECTURE.md) • [Discord](#)
+[Live Demo](https://fathom-0x-ay2zj0yki-anynomousfriends-projects.vercel.app/) • [Video Demo](https://www.youtube.com/watch?v=VasICBwEqNI) • [Documentation](docs/) • [Architecture](docs/TECHNICAL_ARCHITECTURE.md)
 
 </div>
 
