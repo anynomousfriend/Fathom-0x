@@ -277,7 +277,7 @@ User receives verified answer with cryptographic proof of authenticity.
 ## Demo
 
 ### Try It Live
-1. Visit [demo site](http://localhost:3000)
+1. Visit [demo site](https://fathom-0x-ay2zj0yki-anynomousfriends-projects.vercel.app/)
 2. Connect Sui wallet (testnet)
 3. Upload a document (encrypted automatically)
 4. Ask a question
@@ -404,6 +404,6 @@ If you find Fathom Protocol useful, please consider giving us a star ⭐
 
 **Built with ️ for a privacy-preserving future**
 
-[Documentation](docs/) • [Demo](http://localhost:3000) • [Discord](#) • [Twitter](#)
+[Documentation](docs/) • [Demo](https://fathom-0x-ay2zj0yki-anynomousfriends-projects.vercel.app/) • [Video](https://www.youtube.com/watch?v=VasICBwEqNI)
 
 </div>
