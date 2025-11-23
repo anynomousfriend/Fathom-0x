@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="assets/logo-svg.svg" alt="Fathom Protocol" width="300"/>
+<img src="assets/logo-svg.svg" alt="Fathom-0x Protocol" width="300"/>
 
-# Fathom Protocol
+# Fathom-0x Protocol
 
 **Privacy-Preserving RAG on Blockchain**
 
@@ -38,16 +38,16 @@ This launches:
 
 ---
 
-## What is Fathom Protocol?
+## What is Fathom-0x Protocol?
 
-Fathom Protocol solves the fundamental problem with AI: **you can't use powerful AI models without exposing your private data**.
+Fathom-0x Protocol solves the fundamental problem with AI: **you can't use powerful AI models without exposing your private data**.
 
 Traditional RAG (Retrieval-Augmented Generation) systems force an impossible choice:
 - **Cloud RAG** (OpenAI, AWS): Upload your data in plaintext lose privacy
 - **Self-Hosted RAG**: Keep data private lose AI capabilities
 - **Don't Use AI**: Keep privacy lose competitive advantage
 
-**Fathom Protocol gives you both**: quality AI with cryptographic privacy guarantees.
+**Fathom-0x Protocol gives you both**: quality AI with cryptographic privacy guarantees.
 
 ---
 
@@ -391,7 +391,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Star History
 
-If you find Fathom Protocol useful, please consider giving us a star ⭐
+If you find Fathom-0x Protocol useful, please consider giving us a star ⭐
 
 ---
 
