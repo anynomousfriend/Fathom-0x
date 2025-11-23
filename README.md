@@ -366,7 +366,7 @@ We follow coordinated disclosure and offer bounties for critical findings.
 
 ## Hackathon Submission
 
-**Walrus Haulout Hackathon 2024**
+**Walrus Haulout Hackathon 2025**
 
 *Submission Track: AI x Data*
 
