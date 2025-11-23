@@ -276,9 +276,6 @@ User receives verified answer with cryptographic proof of authenticity.
 
 ## Demo
 
-### Video Demo
-[![Fathom Protocol Demo](assets/demo-thumbnail.png)](https://youtu.be/your-demo-video)
-
 ### Try It Live
 1. Visit [demo site](http://localhost:3000)
 2. Connect Sui wallet (testnet)
@@ -290,14 +287,14 @@ User receives verified answer with cryptographic proof of authenticity.
 
 <div align="center">
 
-**Document Upload**
-<img src="assets/screenshot-upload.png" width="600" alt="Upload Interface"/>
+**Landing Page**
+<img src="assets/Landing_page.png" width="600" alt="Landing Page"/>
 
-**Query Interface**
-<img src="assets/screenshot-query.png" width="600" alt="Query Interface"/>
+**Document Upload**
+<img src="assets/Upload_interface.png" width="600" alt="Upload Interface"/>
 
 **Verified Answer**
-<img src="assets/screenshot-answer.png" width="600" alt="Answer Display"/>
+<img src="assets/Verified_answers.png" width="600" alt="Verified Answers"/>
 
 </div>
 
