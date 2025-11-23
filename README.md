@@ -364,14 +364,11 @@ We follow coordinated disclosure and offer bounties for critical findings.
 
 ---
 
-## Hackathon & Awards
+## Hackathon Submission
 
-### Sui Overflow Hackathon 2024
-- Best Use of Walrus Storage
-- Most Innovative Privacy Solution
-- Best Smart Contract Design
+**Sui Overflow Hackathon 2024**
 
-*Submission Category: DeFi & Infrastructure*
+*Submission Track: AI x Data*
 
 ---
 
