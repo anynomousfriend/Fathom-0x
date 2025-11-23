@@ -9,25 +9,24 @@ query is processed in a Trusted Execution Environment.
 
 Usage:
   python demo_tee_simulation.py
-  
+
 Or run in background during live demo:
   python demo_tee_simulation.py --live
 """
 
 import time
 import sys
-import json
 from datetime import datetime
 import hashlib
-import base64
+
 
 class TEESimulator:
     """Visual simulator for TEE processing"""
-    
+
     def __init__(self, verbose=True):
         self.verbose = verbose
         self.query_count = 0
-        
+
     def print_box(self, title, content, color="blue"):
         """Print a nice box with content"""
         colors = {
@@ -39,10 +38,10 @@ class TEESimulator:
             "cyan": "\033[96m",
             "end": "\033[0m"
         }
-        
+
         c = colors.get(color, colors["blue"])
         end = colors["end"]
-        
+
         width = 70
         print(f"\n{c}{'='*width}{end}")
         print(f"{c}║ {title.center(width-4)} ║{end}")
@@ -53,7 +52,7 @@ class TEESimulator:
         else:
             print(f"{c}║{end} {content:<{width-4}} {c}║{end}")
         print(f"{c}{'='*width}{end}\n")
-    
+
     def simulate_step(self, step_name, duration=0.5, substeps=None):
         """Simulate a processing step with progress"""
         print(f"\n🔄 {step_name}")
@@ -63,15 +62,19 @@ class TEESimulator:
                 print(f"   ✓ {substep}")
         else:
             time.sleep(duration)
-            print(f"   ✓ Complete")
-    
-    def demo_full_flow(self, query="What are the main findings?", doc_name="research_paper.txt"):
+            print("   ✓ Complete")
+
+    def demo_full_flow(
+            self,
+            query="What are the main findings?",
+            doc_name="research_paper.txt"):
+
         """Demonstrate the complete TEE processing flow"""
-        
+
         self.query_count += 1
         query_id = f"query_{self.query_count}_{int(time.time())}"
         doc_id = hashlib.sha256(doc_name.encode()).hexdigest()
-        
+
         # Title
         self.print_box(
             "🔐 FATHOM-0x PROTOCOL - TEE PROCESSING SIMULATION",
@@ -83,7 +86,7 @@ class TEESimulator:
             ],
             "cyan"
         )
-        
+
         # Step 1: TEE Initialization
         self.print_box(
             "STEP 1: TEE ENCLAVE INITIALIZATION",
@@ -95,7 +98,7 @@ class TEESimulator:
             ],
             "blue"
         )
-        
+
         self.simulate_step(
             "Initializing secure environment",
             0.8,
@@ -106,7 +109,7 @@ class TEESimulator:
                 "TEE enclave ready"
             ]
         )
-        
+
         # Step 2: Document Retrieval
         self.print_box(
             "STEP 2: ENCRYPTED DOCUMENT RETRIEVAL",
@@ -118,7 +121,7 @@ class TEESimulator:
             ],
             "blue"
         )
-        
+
         self.simulate_step(
             "Fetching encrypted document",
             0.6,
@@ -129,7 +132,7 @@ class TEESimulator:
                 "Encrypted data received (2.3 MB)"
             ]
         )
-        
+
         # Step 3: Secure Decryption
         self.print_box(
             "STEP 3: IN-ENCLAVE DECRYPTION",
@@ -141,7 +144,7 @@ class TEESimulator:
             ],
             "yellow"
         )
-        
+
         self.simulate_step(
             "Decrypting inside secure enclave",
             0.7,
@@ -152,7 +155,7 @@ class TEESimulator:
                 "✓ Plaintext available (only inside TEE)"
             ]
         )
-        
+
         # Step 4: Document Processing
         self.print_box(
             "STEP 4: DOCUMENT CHUNKING & INDEXING",
@@ -164,7 +167,7 @@ class TEESimulator:
             ],
             "blue"
         )
-        
+
         self.simulate_step(
             "Processing document structure",
             0.5,
@@ -175,7 +178,7 @@ class TEESimulator:
                 "Generated 45 searchable chunks"
             ]
         )
-        
+
         # Step 5: Semantic Search
         self.print_box(
             "STEP 5: SEMANTIC SEARCH",
@@ -187,7 +190,7 @@ class TEESimulator:
             ],
             "blue"
         )
-        
+
         self.simulate_step(
             "Finding relevant context",
             0.6,
@@ -198,7 +201,7 @@ class TEESimulator:
                 "Selected top 3 most relevant chunks"
             ]
         )
-        
+
         # Step 6: LLM Query
         self.print_box(
             "STEP 6: AI MODEL INFERENCE",
@@ -210,7 +213,7 @@ class TEESimulator:
             ],
             "purple"
         )
-        
+
         self.simulate_step(
             "Querying AI model",
             1.2,
@@ -221,10 +224,16 @@ class TEESimulator:
                 "AI-generated answer received"
             ]
         )
-        
+
         # Step 7: Answer Generation
-        answer = "Based on the research findings, the study demonstrates that TEE-based inference maintains 99.8% accuracy compared to unprotected models while providing cryptographic privacy guarantees. The blockchain integration ensures complete audit trails and data provenance."
-        
+        answer = (
+            "Based on the research findings, the study demonstrates that "
+            "TEE-based inference maintains 99.8% accuracy compared to "
+            "unprotected models while providing cryptographic privacy "
+            "guarantees. The blockchain integration ensures complete audit "
+            "trails and data provenance."
+        )
+
         self.print_box(
             "STEP 7: ANSWER GENERATED",
             [
@@ -235,10 +244,13 @@ class TEESimulator:
             ],
             "green"
         )
-        
+
         # Step 8: TEE Attestation
-        attestation_hash = hashlib.sha256(f"{query_id}:{doc_id}:{time.time()}".encode()).hexdigest()
-        
+        attestation_data = f"{query_id}:{doc_id}:{time.time()}"
+        attestation_hash = hashlib.sha256(
+            attestation_data.encode()
+        ).hexdigest()
+
         self.print_box(
             "STEP 8: CRYPTOGRAPHIC ATTESTATION",
             [
@@ -249,7 +261,7 @@ class TEESimulator:
             ],
             "yellow"
         )
-        
+
         self.simulate_step(
             "Generating TEE attestation",
             0.5,
@@ -260,10 +272,11 @@ class TEESimulator:
                 "Attestation ready for blockchain"
             ]
         )
-        
+
         # Step 9: Blockchain Submission
-        tx_hash = hashlib.sha256(f"tx_{query_id}_{time.time()}".encode()).hexdigest()
-        
+        tx_data = f"tx_{query_id}_{time.time()}"
+        tx_hash = hashlib.sha256(tx_data.encode()).hexdigest()
+
         self.print_box(
             "STEP 9: BLOCKCHAIN VERIFICATION",
             [
@@ -274,7 +287,7 @@ class TEESimulator:
             ],
             "green"
         )
-        
+
         self.simulate_step(
             "Recording on blockchain",
             0.8,
@@ -285,7 +298,7 @@ class TEESimulator:
                 "Transaction confirmed (immutable record)"
             ]
         )
-        
+
         # Step 10: Cleanup
         self.print_box(
             "STEP 10: SECURE MEMORY CLEANUP",
@@ -297,7 +310,7 @@ class TEESimulator:
             ],
             "red"
         )
-        
+
         self.simulate_step(
             "Cleaning secure enclave",
             0.4,
@@ -308,13 +321,13 @@ class TEESimulator:
                 "TEE enclave clean ✓"
             ]
         )
-        
+
         # Final Summary
         self.print_box(
             "[OK] QUERY PROCESSING COMPLETE",
             [
                 f"Query ID: {query_id}",
-                f"Processing Time: ~6.5 seconds",
+                "Processing Time: ~6.5 seconds",
                 "Security: ✓ TEE-protected",
                 "Verification: ✓ Blockchain-recorded",
                 "Privacy: ✓ Document never exposed",
@@ -324,52 +337,60 @@ class TEESimulator:
             ],
             "green"
         )
-        
+
         # Show what user sees
         print("\n" + "="*70)
         print("🖥️  USER'S VIEW IN FRONTEND:")
         print("="*70)
         print(f"\n📄 Document: {doc_name}")
         print(f"❓ Question: {query}")
-        print(f"\nINFO Answer:")
+        print("\nINFO Answer:")
         print(f"   {answer}")
-        print(f"\n🔗 Transaction: https://suiexplorer.com/txblock/{tx_hash}?network=testnet")
-        print(f"📊 Mode: Real RAG - GEMINI")
-        print(f"[SECURE]  Verified: TEE Attestation ✓")
+        tx_url = (f"https://suiexplorer.com/txblock/"
+                  f"{tx_hash}?network=testnet")
+        print(f"\n🔗 Transaction: {tx_url}")
+        print("📊 Mode: Real RAG - GEMINI")
+        print("[SECURE]  Verified: TEE Attestation ✓")
         print("\n" + "="*70 + "\n")
+
 
 def main():
     """Main entry point"""
-    
+
     print("\n" + "[FATHOM] "*20)
     print("  FATHOM-0x PROTOCOL - TEE DEMONSTRATION")
     print("  Privacy-Preserving RAG with Trusted Execution")
     print("[FATHOM] "*20 + "\n")
-    
+
     simulator = TEESimulator()
-    
+
     # Check for live mode
     if len(sys.argv) > 1 and sys.argv[1] == "--live":
         print("📺 LIVE DEMO MODE - Press Enter to process queries...\n")
-        
+
         demo_queries = [
             ("What are the main findings?", "research_paper.txt"),
             ("Show me the revenue data", "financial_report.txt"),
             ("What are the patient's symptoms?", "patient_record.txt")
         ]
-        
+
         for query, doc in demo_queries:
-            input(f"\n🎬 Ready to process: '{query}' on '{doc}'\nPress Enter...")
+            prompt = (
+                f"\n🎬 Ready to process: '{query}' on '{doc}'\n"
+                f"Press Enter..."
+            )
+            input(prompt)
             simulator.demo_full_flow(query, doc)
             print("\n" + "⏸️  "*20 + "\n")
     else:
         # Single demo run
         simulator.demo_full_flow()
-        
+
         print("\n" + "="*70)
         print("INFO TIP: Run with '--live' flag for interactive demo mode")
         print("   Example: python demo_tee_simulation.py --live")
         print("="*70 + "\n")
+
 
 if __name__ == "__main__":
     main()

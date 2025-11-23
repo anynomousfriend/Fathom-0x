@@ -39,7 +39,7 @@ POLL_INTERVAL = int(os.getenv("POLL_INTERVAL", "10"))
 
 class FathomOracle:
     """Main oracle class for processing queries"""
-    
+
     def __init__(self):
         """Initialize the oracle with Sui client configuration"""
         print("[FATHOM] Initializing Fathom Oracle Node...")
