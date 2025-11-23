@@ -393,11 +393,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-- **Website**: https://fathom-protocol.com
-- **Email**: hello@fathom-protocol.com
-- **Twitter**: [@FathomProtocol](https://twitter.com/fathomprotocol)
-- **Discord**: [Join our community](https://discord.gg/fathom)
-- **GitHub**: [github.com/fathom-protocol](https://github.com/fathom-protocol)
+- **Website**: [https://subhankar-s-portfolio.vercel.app/](https://subhankar-s-portfolio.vercel.app/)
+- **GitHub**: [https://github.com/anynomousfriend](https://github.com/anynomousfriend)
+- **Twitter/X**: [https://x.com/SsubhankarX](https://x.com/SsubhankarX?t=S2s-0mx5Vex7yhfwe5iUng)
+- **LinkedIn**: [Subhankar Choudhury](https://www.linkedin.com/in/subh-choudhury/)
 
 ---
 
