@@ -340,11 +340,6 @@ cd ../contracts && sui move build
 - Smart contract audit: *Pending*
 - Security review: *In progress*
 
-### Responsible Disclosure
-Found a security issue? Email: security@fathom-protocol.com
-
-We follow coordinated disclosure and offer bounties for critical findings.
-
 ---
 
 ## Performance
