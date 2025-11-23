@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { X, Upload, Lock, CheckCircle, Loader2, Download, ExternalLink } from 'lucide-react'
 import { encryptFile, generateFingerprint } from '@/lib/encryption'
 import { uploadToWalrus } from '@/lib/walrus'
@@ -29,10 +29,25 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
 
   const { mutate: signAndExecute } = useSignAndExecuteTransactionBlock()
   const packageId = process.env.NEXT_PUBLIC_PACKAGE_ID
   const configId = process.env.NEXT_PUBLIC_CONFIG_OBJECT_ID
+
+  // Scroll to modal when it opens
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    
+    // Scroll the modal into view
+    if (modalRef.current) {
+      modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [])
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -214,8 +229,9 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-card rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-border custom-scrollbar">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 overflow-y-auto">
+      <div className="min-h-full flex items-center justify-center p-4">
+        <div ref={modalRef} className="bg-card rounded-xl shadow-xl max-w-2xl w-full my-8 border border-border flex flex-col max-h-[calc(100vh-4rem)]">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-border sticky top-0 bg-card">
           <div className="flex items-center gap-3">
@@ -289,7 +305,7 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="p-6 space-y-6 overflow-y-auto custom-scrollbar flex-1">
           {/* Step 1: File Selection */}
           {uploadStep === 'select' && (
             <>
@@ -714,6 +730,7 @@ export function RegisterDocumentModal({ onClose }: RegisterDocumentModalProps) {
             </div>
           )}
         </form>
+        </div>
       </div>
     </div>
   )
