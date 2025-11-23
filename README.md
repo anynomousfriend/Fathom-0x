@@ -33,8 +33,8 @@ This launches:
 
 **Then open:** http://localhost:3000
 
- **Full Demo Guide:** See [DEMO_DAY_PRESENTATION.md](DEMO_DAY_PRESENTATION.md) for complete presentation script
- **Quick Reference:** See [README_DEMO_QUICK.md](README_DEMO_QUICK.md) for 1-page cheat sheet
+ **Full Demo Guide:** See [DEMO_DAY_PRESENTATION.md](docs/DEMO_DAY_PRESENTATION.md) for complete presentation script
+ **Quick Reference:** See [README_DEMO_QUICK.md](docs/README_DEMO_QUICK.md) for 1-page cheat sheet
 
 ---
 
